@@ -1,0 +1,29 @@
+{
+  "archive": "/mnt/ARCHIVE/2d_human_pose_estimation_preserved/20261024T1100_static_attention_transfer/package/upar_track3_final_candidate.zip",
+  "archive_sha256": "83ffd518454828d8a9ca264b4b3f08d8b33563cd1bb713245b398ea90709dca1",
+  "decision": "ADOPT_STATIC_EXPORT_WITH_UNCHANGED_WEIGHTS_AND_ALGORITHM",
+  "development": {
+    "1": {
+      "AP": 0.9172694637536569,
+      "baseline_predictions": "artifacts/runs/20261024T0155_controlled_factorial/tier1/baseline_predictions.json",
+      "images": 2314,
+      "max_pixel_difference": 0.0,
+      "max_score_difference": 0.0,
+      "new_predictions": "artifacts/runs/20261024T1100_static_attention_transfer/tier1/static_predictions.json"
+    },
+    "3": {
+      "AP": 0.9171743571549834,
+      "baseline_predictions": "artifacts/runs/20261024T0155_controlled_factorial/tier3/baseline_predictions.json",
+      "images": 2314,
+      "max_pixel_difference": 0.0,
+      "max_score_difference": 0.0,
+      "new_predictions": "artifacts/runs/20261024T1100_static_attention_transfer/tier3/static_predictions.json"
+    }
+  },
+  "limitations": [
+    "Exact local parity and shared-host speed only; official full-size runtime and Public unknown.",
+    "No new model accuracy improvement; inference degradation is less likely only when measured pace benefits."
+  ],
+  "production": "artifacts/runs/20261024T1100_static_attention_transfer/production_probe.json",
+  "public_estimate": null
+}

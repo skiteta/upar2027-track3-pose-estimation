@@ -1,0 +1,37 @@
+{
+  "CRC_and_member_SHA_pass": true,
+  "after": {
+    "LICENSE_MMPose.txt": "aa2c6f3408169b96e5547c875deb481c91502514c1885fa0acb4b596c8909cb9",
+    "metadata.yaml": "6bf44083a3ab99e68efa2f4151cfec26d0a87876213011bc22061a031d24df23",
+    "model_l3.torchscript": "d1570a01939023295825aff2f9d519457cd0e27c98c7562dfc33575c580dda02",
+    "model_meta.json": "59dd3cf6124049f542fded5cacfc44b4edcb57159d75111da29ed50a281bab67",
+    "model_rsn.torchscript": "9df1ea685fb0c050640548a293948e424400d78f64a833a495622204bc252736",
+    "model_vp.torchscript": "b64527f2585af2baecdd9fada4122bcf6a29805ac606692cf39b87451d5baaf7",
+    "run.py": "90bd69713a07be6a080370cd6b0128a9da7e6833fa28305acf230c9351122309"
+  },
+  "archive": "/mnt/ARCHIVE/2d_human_pose_estimation_preserved/20261024T1100_static_attention_transfer/package/upar_track3_final_candidate.zip",
+  "archive_bytes": 1260249633,
+  "archive_sha256": "83ffd518454828d8a9ca264b4b3f08d8b33563cd1bb713245b398ea90709dca1",
+  "before": {
+    "LICENSE_MMPose.txt": "aa2c6f3408169b96e5547c875deb481c91502514c1885fa0acb4b596c8909cb9",
+    "metadata.yaml": "6bf44083a3ab99e68efa2f4151cfec26d0a87876213011bc22061a031d24df23",
+    "model_l3.torchscript": "d1570a01939023295825aff2f9d519457cd0e27c98c7562dfc33575c580dda02",
+    "model_meta.json": "bf69d111d611873a006b9c3f48a295598c59f8997df2cb50012e7a1aa62490d8",
+    "model_rsn.torchscript": "9df1ea685fb0c050640548a293948e424400d78f64a833a495622204bc252736",
+    "model_vp.torchscript": "b64527f2585af2baecdd9fada4122bcf6a29805ac606692cf39b87451d5baaf7",
+    "run.py": "90bd69713a07be6a080370cd6b0128a9da7e6833fa28305acf230c9351122309"
+  },
+  "changed_members": [
+    "model_meta.json"
+  ],
+  "metadata_contract_pass": true,
+  "public_AP": null,
+  "remaining": [
+    "Final metadata-revision GPU output parity and boundary cases",
+    "Official full30245image hardware/runtime and reopening",
+    "Pending1007677 official status",
+    "Organizer eligibility clarification for declared upstream ancestry"
+  ],
+  "selection": "artifacts/runs/20261024T1100_static_attention_transfer/selection.json",
+  "status": "PREPARED_NOT_SUBMITTED"
+}

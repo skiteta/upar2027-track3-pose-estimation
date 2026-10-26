@@ -85,6 +85,7 @@ def main():
     args = parser.parse_args()
 
     submission, input_dir = args.submission.resolve(), args.input.resolve()
+    output = args.output.resolve()  # resolve before the chdir below, so relative paths stay relative to the caller
     samples = build_samples(input_dir)[: args.limit]
     os.chdir(submission)  # the official container runs from the submission folder
     run = load_submission(submission)
@@ -97,10 +98,10 @@ def main():
         if index % 500 == 0:
             print(f"[replay] {index}/{len(samples)} images, {time.perf_counter() - start:.1f}s", flush=True)
     seconds = time.perf_counter() - start
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(rows))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(rows))
     print(json.dumps({"images": len(samples), "predictions": len(rows), "seconds": round(seconds, 1),
-                      "output": str(args.output)}))
+                      "output": str(output)}))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,25 @@
+CPU smoke test of the exact final archive with inference/run_codabench_layout.py (2026-10-27, author's machine)
+
+Archive    : upar_track3_final_candidate.zip, 1,260,249,633 bytes
+             sha256 83ffd518454828d8a9ca264b4b3f08d8b33563cd1bb713245b398ea90709dca1
+             run.py inside the zip: sha256 90bd69713a07be6a080370cd6b0128a9da7e6833fa28305acf230c9351122309
+Environment: Python 3.12.3, torch 2.4.1+cpu, CUDA_VISIBLE_DEVICES="" (CPU only), OMP_NUM_THREADS=2
+Input      : Codabench layout (images/ + boxes.json), 6 images / 6 person boxes: the first image of each held-out
+             PETA development camera (PRID, CAVIAR4REID, i-LID, GRID, SARC3D) plus one more GRID image.
+             These are organizer training images (the final members were trained on them), so the AP below is a
+             smoke check of the input/output path, not an accuracy estimate. Images are not redistributed here.
+
+Command:
+  python inference/run_codabench_layout.py --submission submission --input input_data \
+      --output predictions.json --limit 6
+
+Log:
+  [submission] upar_fusion3_sahi_anat9_v118: 3-model fusion, 4 views + Gated-2Slice-SAHI on cpu
+  {"images": 6, "predictions": 6, "seconds": 243.1, ...}
+
+(On CPU, run.py forces the zoom path for its first four images as a built-in smoke switch.)
+All 6 predictions finite (17 keypoints x 3 values + score each); a repeated run produced byte-identical output.
+
+python inference/evaluate_keypoints.py --gt ground_truth.json --pred predictions.json
+  {"AP": 0.895842, "AP50": 1.0, "AP75": 0.831683, "AP_medium": 0.983498, "AP_large": 0.851485,
+   "AR": 0.9, "AR50": 1.0, "AR75": 0.833333, "AR_medium": 1.0, "AR_large": 0.85}
