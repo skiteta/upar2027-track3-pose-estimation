@@ -1,0 +1,233 @@
+{
+  "allocator_cap_gib": 14.0,
+  "audit_only": false,
+  "batch_size": 16,
+  "candidate": "upar_rsn50_hard8_okskd_prod_v106",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "evaluate_initial": false,
+  "evaluation_role": "train_diagnostic",
+  "event_path": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_hard8_okskd_event.json",
+  "expected_train_examples": 42736,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "fit_includes_heldout": true,
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/3DPeS": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/GRID": 0.05,
+    "peta/MIT": 0.05,
+    "peta/PRID": 0.05,
+    "peta/SARC3D": 0.05,
+    "peta/TownCentre": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/i-LID": 0.05
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_ext5mKD/soup_RSN_v103a_weights.pt",
+  "init_checkpoint_sha256": "d5b78b618fd4affb8f42278099fee313b98893f9f760087d8e108300248511fe",
+  "init_epoch": 24,
+  "init_note": "Frozen copy of upar_rsn_v42 last_checkpoint at epoch24 (best local PETA AP0.9291699), model+AdamW state.",
+  "input_size": [
+    256,
+    256
+  ],
+  "learning_rate": 5e-06,
+  "max_epochs": 2,
+  "output_dir": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_hard8_okskd",
+  "person_paste_probability": 0.35,
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "precision": "bf16",
+  "purpose": "Prod arm: 2-epoch GT-supported 5-member External-Boosted KD (VPHs_256 w=2.5 + VITLP448 w=1.5 + RSN w=2.0 + L3 w=1.5 + VPLs w=1.5) into soup_RSN_85tr25_15kd2.",
+  "samples_per_epoch": 32000,
+  "seed": 20261005,
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "train_examples": 42736,
+  "train_population": {
+    "market": 12923,
+    "pa100k": 19499,
+    "peta/3DPeS": 614,
+    "peta/CAVIAR4REID": 626,
+    "peta/CUHK": 2289,
+    "peta/GRID": 705,
+    "peta/MIT": 543,
+    "peta/PRID": 638,
+    "peta/SARC3D": 113,
+    "peta/TownCentre": 3820,
+    "peta/VIPeR": 734,
+    "peta/i-LID": 232
+  },
+  "weight_decay": 0.0001,
+  "workers": 2,
+  "strong_augmentation": {
+    "note": "Truncation-only arm: all strong_augmentation probabilities 0 except test-like truncation (0.15, keep 0.45-0.85; side 0.2).",
+    "seed": 20261977,
+    "rotate_prob": 0.0,
+    "rotate_deg": 40.0,
+    "scale_prob": 0.0,
+    "scale_range": [
+      0.65,
+      1.35
+    ],
+    "shift_prob": 0.0,
+    "shift_frac": 0.16,
+    "half_body_prob": 0.0,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_min_lower": 3,
+    "half_body_padding": 1.5,
+    "half_body_upper_prob": 0.7,
+    "half_body_min_side_frac": 0.3,
+    "color_jitter": {
+      "prob": 0.0,
+      "brightness_delta": 32.0,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "saturation_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18.0,
+      "channel_swap_prob": 0.0
+    },
+    "hole_prob": 0.0,
+    "hole_min_frac": 0.1,
+    "hole_max_frac": 0.4,
+    "blur_prob": 0.0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "median_blur_prob": 0.0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0.0,
+    "noise_sigma": [
+      3.0,
+      10.0
+    ],
+    "truncation_prob": 0.15,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_side_prob": 0.2,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_min_labelled": 4
+  },
+  "init_mode": "weights",
+  "warmup_epochs": 1,
+  "warmup_mode": "linear_steps",
+  "save_weights_from_epoch": 1,
+  "evaluate_every": 2,
+  "save_best_weights": true,
+  "eval_workers": 2,
+  "distill": {
+    "lambda": 2.0,
+    "supervision": "gt_supported",
+    "note": "Fast A100 Wave-6 Hard8 (top-8 hardest joints mix=0.4) + OKS-scaled soft-argmax coord_loss (w=0.004) + head/distal joint_loss_weights (head=2.5, wrist=1.6, ankle=1.5) + 3-family GT-supported KD.",
+    "teachers": [
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_ext5mKD.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_ext5mKD/soup_RSN_v103a_weights.pt",
+        "weight": 2.0,
+        "sha256": "d5b78b618fd4affb8f42278099fee313b98893f9f760087d8e108300248511fe"
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_ext6mKD.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_ext6mKD/soup_L3_v104_prod_weights.pt",
+        "weight": 2.0,
+        "sha256": "f30f86b721818d8d2bcf1984aed6a108dcd7fed8ff4ff36641d0f025d68d3c50"
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_ext6mKD.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_ext6mKD/soup_VP_v104_prod_weights.pt",
+        "weight": 2.5,
+        "sha256": "dfcddb05f06a97e97908482dc17cdfd3d914356a5f927f539a5ba687c3a6bc2f"
+      }
+    ]
+  },
+  "joint_loss_weights": [
+    2.5,
+    2.5,
+    2.5,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.2,
+    1.2,
+    1.6,
+    1.6,
+    1.0,
+    1.0,
+    1.2,
+    1.2,
+    1.5,
+    1.5
+  ],
+  "coord_loss": {
+    "norm": "euclidean",
+    "oks_scaled": true,
+    "scale_fraction": 0.5,
+    "smooth": 0.25,
+    "temperature": 10.0,
+    "type": "l1",
+    "weight": 0.003,
+    "window": 6.0
+  },
+  "hard_joint": {
+    "keep": 8,
+    "mix": 0.4
+  }
+}

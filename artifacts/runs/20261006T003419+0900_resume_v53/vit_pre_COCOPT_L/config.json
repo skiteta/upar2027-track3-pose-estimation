@@ -1,0 +1,102 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl_cocomae_pose_pretrain_coco_pt18_v57",
+  "coco_annotation_files": [
+    "data/external/coco/annotations/person_keypoints_train2017.json"
+  ],
+  "coco_image_dirs": {
+    "data/external/coco/annotations/person_keypoints_train2017.json": "external/coco/train2017"
+  },
+  "coco_min_box_height": 32,
+  "coco_min_labelled": 6,
+  "coco_source": "Official COCO 2017 person_keypoints_train2017 + train2017 images (images.cocodataset.org); Terms 3 permit COCO pre-training.",
+  "config_sha256": "9899a3275eb24ca6b6b1e98299a19c206456a7c8a4572349f8d13ad8b0bef8d8",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "evaluate_initial": false,
+  "evaluation_role": "development",
+  "event_path": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L_event.json",
+  "expected_train_examples": 140550,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "coco": 0.75,
+    "posetrack18": 0.25
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "data/external/coco_mae/vitl_coco_mae_448.pth",
+  "init_checkpoint_sha256": "270bee3b98ca7c8a3108c2947a0d6f01a640708d57300b1f0b0ba37be1b75216",
+  "init_epoch": 0,
+  "init_mode": "mae",
+  "init_note": "facebookresearch long_seq_mae encoder pretrained only on COCO train2017+unlabeled2017 images (random init, 800 ep x dup5 at 448px); CC-BY-NC-4.0.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      4,
+      3e-05
+    ]
+  ],
+  "max_epochs": 5,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L",
+  "person_paste_probability": 0.35,
+  "posetrack18_annotation_files": [
+    "data/external/posetrack18/annotations/posetrack18_train.json",
+    "data/external/posetrack18/annotations/posetrack18_val.json"
+  ],
+  "posetrack18_min_box_height": 32,
+  "posetrack18_min_labelled": 6,
+  "posetrack18_require_image": true,
+  "posetrack18_source": "Official mmpose-converted PoseTrack18 annotations (download.openmmlab.com) + official image tar parts aa/ab (owner andriluk/schiele) from the Hyper.AI figshare mirror; the mirror is truncated, so only persons whose image exists are used.",
+  "precision": "bf16",
+  "purpose": "H-D stage 1: supervised keypoint pre-training of the COCO-only MAE ViT-L on the two permitted pre-training sources (COCO 2017 keypoints + PoseTrack18) before organiser-data fine-tuning. PETA hard5 evaluation each epoch is zero-shot unseen-domain monitoring. Joint COCO+PoseTrack effect, not separated per source.",
+  "samples_per_epoch": 48000,
+  "seed": 20261007,
+  "train_domains": [
+    "coco",
+    "posetrack18"
+  ],
+  "train_examples": 140550,
+  "train_population": {
+    "coco": 123202,
+    "posetrack18": 17348
+  },
+  "vit_arch": "vit_l",
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

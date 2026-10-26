@@ -1,0 +1,11 @@
+# Local evaluation/data tooling. The official submission container is Python
+# 3.11 + torch 2.4.1; this host only exposes Python 3.12, so container parity is
+# checked separately from these development utilities.
+numpy==1.26.4
+Pillow==10.2.0
+tqdm==4.66.5
+requests==2.31.0
+gdown==5.2.0
+pycocotools==2.0.10
+pytest==8.3.5
+PyYAML==6.0.1

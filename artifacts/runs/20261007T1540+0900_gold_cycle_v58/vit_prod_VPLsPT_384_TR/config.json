@@ -1,0 +1,188 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl384_vitposeL_L3struct_pt18x_truncaug_allsource_v88",
+  "config_sha256": "3a315c4a4dc37fef4ff6d392dcec3fd32d61cf92b56b22e2a1410115ae434ae0",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 4,
+  "evaluate_every": 12,
+  "evaluate_initial": false,
+  "evaluation_role": "train_diagnostic",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLsPT_384_TR_event.json",
+  "expected_train_examples": 42736,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "fit_includes_heldout": true,
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/3DPeS": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/GRID": 0.05,
+    "peta/MIT": 0.05,
+    "peta/PRID": 0.05,
+    "peta/SARC3D": 0.05,
+    "peta/TownCentre": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/i-LID": 0.05
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_VPLs_PT18x/epoch_006_weights.pt",
+  "init_checkpoint_sha256": "dcdb0989663513443a91d04c57fe6627e88bd4bf54b58f77c0fea3744040fabf",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "ImageNet-1K MAE -> MMPose ViTPose-L COCO -> transplanted L3 graph -> COCO + PoseTrack18x pre-training (vit_pre_VPLs_PT18x e6).",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      9,
+      3e-05
+    ]
+  ],
+  "max_epochs": 12,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLsPT_384_TR",
+  "person_paste_probability": 0.35,
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "precision": "bf16",
+  "purpose": "Production counterpart of vit_arm_VPLsPT_384_TR on all organiser data; packaged only if the dev analogue beats candidate (a) with a CI excluding 0.",
+  "quality_head": false,
+  "samples_per_epoch": 32000,
+  "save_weights_from_epoch": 6,
+  "seed": 20261005,
+  "strong_augmentation": {
+    "blur_prob": 0.0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "color_jitter": {
+      "brightness_delta": 32.0,
+      "channel_swap_prob": 0.0,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18.0,
+      "prob": 0.0,
+      "saturation_range": [
+        0.5,
+        1.5
+      ]
+    },
+    "half_body_min_lower": 3,
+    "half_body_min_side_frac": 0.3,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_padding": 1.5,
+    "half_body_prob": 0.0,
+    "half_body_upper_prob": 0.7,
+    "hole_max_frac": 0.4,
+    "hole_min_frac": 0.1,
+    "hole_prob": 0.0,
+    "median_blur_prob": 0.0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0.0,
+    "noise_sigma": [
+      3.0,
+      10.0
+    ],
+    "note": "Truncation-only arm: all strong_augmentation probabilities 0 except test-like truncation (0.15, keep 0.45-0.85; side 0.2).",
+    "rotate_deg": 40.0,
+    "rotate_prob": 0.0,
+    "scale_prob": 0.0,
+    "scale_range": [
+      0.65,
+      1.35
+    ],
+    "seed": 20261977,
+    "shift_frac": 0.16,
+    "shift_prob": 0.0,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_min_labelled": 4,
+    "truncation_prob": 0.15,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_side_prob": 0.2
+  },
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "train_examples": 42736,
+  "train_population": {
+    "market": 12923,
+    "pa100k": 19499,
+    "peta/3DPeS": 614,
+    "peta/CAVIAR4REID": 626,
+    "peta/CUHK": 2289,
+    "peta/GRID": 705,
+    "peta/MIT": 543,
+    "peta/PRID": 638,
+    "peta/SARC3D": 113,
+    "peta/TownCentre": 3820,
+    "peta/VIPeR": 734,
+    "peta/i-LID": 232
+  },
+  "vit_arch": "vit_l",
+  "vit_image_size": 384,
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

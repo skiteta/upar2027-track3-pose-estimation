@@ -1,0 +1,4 @@
+# CPU-only local smoke-test runtime. Install from the official PyTorch CPU
+# wheel index; evaluation itself uses the organizer's CUDA 12.1 container.
+torch==2.4.1+cpu
+torchvision==0.19.1+cpu

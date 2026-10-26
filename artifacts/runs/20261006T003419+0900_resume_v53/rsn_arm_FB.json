@@ -1,0 +1,87 @@
+{
+ "batch_size": 16,
+ "data_seed": 20261903,
+ "factor_synthesis": {
+  "held_out_pairs": [
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    4
+   ]
+  ],
+  "mode": "uniform",
+  "pair_fraction": 0.25,
+  "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+  "seed": 20261039,
+  "single_fraction": 0.25,
+  "unchanged_fraction": 0.5
+ },
+ "heatmap_sigma": 2,
+ "input_size": [
+  256,
+  256
+ ],
+ "person_paste_probability": 0.35,
+ "precision": "bf16",
+ "seed": 20261005,
+ "weight_decay": 0.0001,
+ "allocator_cap_gib": 14.0,
+ "init_checkpoint": "artifacts/runs/20261006T003419+0900_resume_v53/rsn_e24_init/last_checkpoint_e24.pt",
+ "init_checkpoint_sha256": "c43c0d45b8a5ccbfe99caff30fa147f7a2293bdb97fe05fa187482d8627e9c34",
+ "init_note": "Frozen copy of upar_rsn_v42 last_checkpoint at epoch24 (best local PETA AP0.9291699), model+AdamW state.",
+ "learning_rate": 6e-05,
+ "samples_per_epoch": 32000,
+ "max_epochs": 8,
+ "eval_batch_size": 8,
+ "workers": 0,
+ "domain_mapping": "peta_file_mapping.txt",
+ "heldout_subdomains": [
+  "CAVIAR4REID",
+  "PRID",
+  "i-LID",
+  "GRID",
+  "SARC3D"
+ ],
+ "candidate": "upar_rsn_allsource_balanced_v53",
+ "train_domains": [
+  "market",
+  "pa100k",
+  "peta"
+ ],
+ "peta_train_subdomains": [
+  "TownCentre",
+  "CUHK",
+  "VIPeR",
+  "3DPeS",
+  "MIT",
+  "CAVIAR4REID",
+  "PRID",
+  "i-LID",
+  "GRID",
+  "SARC3D"
+ ],
+ "expected_train_examples": 42736,
+ "evaluation_role": "train_diagnostic",
+ "evaluate_initial": false,
+ "purpose": "All-source production candidate with the PB-validated group-balanced sampling: Market 25%, PA100K 25%, each of the ten PETA cameras 5%. Held-out-camera metrics are train-diagnostic.",
+ "output_dir": "artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB",
+ "event_path": "artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB_event.json",
+ "fit_includes_heldout": true,
+ "group_sampling_weights": {
+  "market": 0.25,
+  "pa100k": 0.25,
+  "peta/TownCentre": 0.05,
+  "peta/CUHK": 0.05,
+  "peta/VIPeR": 0.05,
+  "peta/3DPeS": 0.05,
+  "peta/MIT": 0.05,
+  "peta/CAVIAR4REID": 0.05,
+  "peta/PRID": 0.05,
+  "peta/i-LID": 0.05,
+  "peta/GRID": 0.05,
+  "peta/SARC3D": 0.05
+ }
+}

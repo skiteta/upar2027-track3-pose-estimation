@@ -1,0 +1,109 @@
+{
+  "batch_size": 32,
+  "data_seed": 20261903,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "heatmap_sigma": 2,
+  "input_size": [
+    256,
+    256
+  ],
+  "person_paste_probability": 0.35,
+  "precision": "bf16",
+  "seed": 20261005,
+  "weight_decay": 0.1,
+  "allocator_cap_gib": 30.0,
+  "learning_rate": 0.0001,
+  "samples_per_epoch": 32000,
+  "max_epochs": 6,
+  "eval_batch_size": 8,
+  "workers": 4,
+  "domain_mapping": "peta_file_mapping.txt",
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "candidate": "upar_vitposeH256_pt18x_L3struct_allsource_v93",
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "expected_train_examples": 42736,
+  "evaluation_role": "train_diagnostic",
+  "evaluate_initial": false,
+  "purpose": "Production counterpart of vit_arm_VPHs_256 (all organiser data, same transplant init and recipe, 6 epochs); packaged only if the dev analogue beats (a) with a CI excluding 0 and the 4-member runtime fits.",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256_event.json",
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/TownCentre": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/3DPeS": 0.05,
+    "peta/MIT": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/PRID": 0.05,
+    "peta/i-LID": 0.05,
+    "peta/GRID": 0.05,
+    "peta/SARC3D": 0.05
+  },
+  "vit_arch": "vit_h",
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vitpose_in1k_coco/20261017T1700_vitposeH_pt18x_e10_L3struct.pt",
+  "init_checkpoint_sha256": "571ec6b1ff2d3fc89c0a24af3a780e87a8c072d4f58a548c71c017b1ecfce1cf",
+  "drop_path": 0.5,
+  "layer_decay": 0.85,
+  "model_type": "vit",
+  "init_mode": "weights",
+  "warmup_epochs": 1,
+  "lr_schedule": [
+    [
+      9,
+      3e-05
+    ]
+  ],
+  "grad_clip": 1.0,
+  "init_note": "IN1K MAE -> MMPose ViTPose-H COCO -> COCO+PT18x (vit_pre_VITPOSEH_PT18x e10) -> transplanted L3 structure (p0, MAE cls token).",
+  "quality_head": false,
+  "fit_includes_heldout": true,
+  "save_weights_from_epoch": 6,
+  "vit_image_size": 256,
+  "grad_checkpoint": true,
+  "eval_workers": 4,
+  "evaluate_every": 6,
+  "vit_patch_padding": 0,
+  "vit_with_cls_token": true,
+  "early_vram_reserve_gib": 13
+}

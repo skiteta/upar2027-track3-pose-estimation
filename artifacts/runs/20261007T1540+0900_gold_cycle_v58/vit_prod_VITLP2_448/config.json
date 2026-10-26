@@ -1,0 +1,125 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl448_cocopt_long_pretrained_allsource_balanced_v58",
+  "config_sha256": "fde613a321dc4dceb792ac76fdefb38b54429c9865c0aa7563d003824b02ae11",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 4,
+  "evaluate_every": 12,
+  "evaluate_initial": false,
+  "evaluation_role": "train_diagnostic",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP2_448_event.json",
+  "expected_train_examples": 42736,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "fit_includes_heldout": true,
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/3DPeS": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/GRID": 0.05,
+    "peta/MIT": 0.05,
+    "peta/PRID": 0.05,
+    "peta/SARC3D": 0.05,
+    "peta/TownCentre": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/i-LID": 0.05
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L2/epoch_010_weights.pt",
+  "init_checkpoint_sha256": "545ed4aadf5b279453d74b098a2f75d7c31e4d533c129482724cb2362c6f918d",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "COCO-only MAE ViT-L -> COCO 2017 + PoseTrack18 keypoint pre-training 5 + 10 x 48k (L2 e10); Terms 3.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      9,
+      3e-05
+    ]
+  ],
+  "max_epochs": 12,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP2_448",
+  "person_paste_probability": 0.35,
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "precision": "bf16",
+  "purpose": "Gold path after 967476 (Public 0.894277: the 384 grid improved the hidden head joints): internal-448 ViT-L (28x28 tokens, the native grid of the COCO MAE encoder, 112x112 heatmaps) on all organiser data from the L2 e10 encoder; same recipe as vit_prod_VITLP2_384 otherwise. Production member; dev evidence to follow.",
+  "quality_head": false,
+  "samples_per_epoch": 32000,
+  "save_weights_from_epoch": 12,
+  "seed": 20261005,
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "train_examples": 42736,
+  "train_population": {
+    "market": 12923,
+    "pa100k": 19499,
+    "peta/3DPeS": 614,
+    "peta/CAVIAR4REID": 626,
+    "peta/CUHK": 2289,
+    "peta/GRID": 705,
+    "peta/MIT": 543,
+    "peta/PRID": 638,
+    "peta/SARC3D": 113,
+    "peta/TownCentre": 3820,
+    "peta/VIPeR": 734,
+    "peta/i-LID": 232
+  },
+  "vit_arch": "vit_l",
+  "vit_image_size": 448,
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

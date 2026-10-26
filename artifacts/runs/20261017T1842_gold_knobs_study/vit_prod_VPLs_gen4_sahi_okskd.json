@@ -1,0 +1,270 @@
+{
+  "allocator_cap_gib": 22.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl384_VPLs_gen4_sahi_okskd_prod_v108",
+  "coord_loss": {
+    "norm": "euclidean",
+    "oks_scaled": true,
+    "scale_fraction": 0.5,
+    "smooth": 0.25,
+    "temperature": 10.0,
+    "type": "l1",
+    "weight": 0.004,
+    "window": 6.0
+  },
+  "data_seed": 20261904,
+  "distill": {
+    "lambda": 0.5,
+    "note": "Wave-8 Gen-4 7-Teacher c4 (0.9176 AP) GT-supported KD + SAHI Half-Body + Sharper Head/Distal Sigma.",
+    "supervision": "gt_supported",
+    "teachers": [
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_hard8_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_RSN_v106_5050_prod_weights.pt",
+        "sha256": "297a3a9f6734b4d6b55056bef3bf776ccd792317b3034f77b854a07237185f23",
+        "weight": 1.5
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_sahi_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_sahi_okskd/epoch_001_weights.pt",
+        "sha256": "e412a4c936e790a13f8452e04a1fe04f4ddf1f0bbec9436560ebf3308762cb45",
+        "weight": 0.5
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_hard8_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_L3_v106_e12_prod_weights.pt",
+        "sha256": "81a4b9f791c586f8b12775ab6eb55cfb3f366d3c2b2764f6a2e2da455ab5688a",
+        "weight": 1.3
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_sahi_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_sahi_okskd/epoch_001_weights.pt",
+        "sha256": "3467a09f71ea6f7350eeb8dc0f2efdf7846c0be60b997a470ed08144514440bd",
+        "weight": 0.7
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_hard8_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_VP_v106_7030_prod_weights.pt",
+        "sha256": "03e276f5d306d7141bcf9ce709822ab175fc30c8d4a369d06d90964f34b7c6c7",
+        "weight": 1.3
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_sahi_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_sahi_okskd/epoch_001_weights.pt",
+        "sha256": "b21c3db21e6536f813e0ca1b75239254897901476b056ae4f28f4892c31f184b",
+        "weight": 0.7
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPHs_256_sahi_okskd.json",
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPHs_256_sahi_okskd/epoch_001_weights.pt",
+        "sha256": "7db9c284917c06c23bc90b160990598482d0e088d8e12a695d451d5518b7eb16",
+        "weight": 1.5
+      }
+    ]
+  },
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "early_vram_reserve_gib": 6,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 2,
+  "evaluate_every": 2,
+  "evaluate_initial": false,
+  "evaluation_role": "train_diagnostic",
+  "event_path": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_gen4_sahi_okskd_event.json",
+  "expected_train_examples": 42736,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "fit_includes_heldout": true,
+  "grad_checkpoint": true,
+  "grad_clip": 1,
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/3DPeS": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/GRID": 0.05,
+    "peta/MIT": 0.05,
+    "peta/PRID": 0.05,
+    "peta/SARC3D": 0.05,
+    "peta/TownCentre": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/i-LID": 0.05
+  },
+  "hard_joint": {
+    "keep": 8,
+    "mix": 0.4
+  },
+  "heatmap_sigma": 2,
+  "heatmap_sigma_joint_scale": [
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    1.0,
+    1.0,
+    0.95,
+    0.95,
+    0.85,
+    0.85,
+    1.0,
+    1.0,
+    0.95,
+    0.95,
+    0.9,
+    0.9
+  ],
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_sahi_okskd/epoch_001_weights.pt",
+  "init_checkpoint_sha256": "b21c3db21e6536f813e0ca1b75239254897901476b056ae4f28f4892c31f184b",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "New revision from VPLs dev e12: exact model and AdamW moments/step preserved; new constant LR schedule starts at revision epoch 1. Seed values retained but RNG/sampler/worker streams restart, not an exact epoch-13 resume.",
+  "input_size": [
+    256,
+    256
+  ],
+  "joint_loss_weights": [
+    3.0,
+    3.0,
+    3.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.25,
+    1.25,
+    1.8,
+    1.8,
+    1.0,
+    1.0,
+    1.25,
+    1.25,
+    1.6,
+    1.6
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 4e-06,
+  "lr_schedule": [],
+  "max_epochs": 1,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_gen4_sahi_okskd",
+  "person_paste_probability": 0.35,
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "precision": "bf16",
+  "purpose": "Wave-7 ViTPose-L 384 Gen-3 5-Teacher GT-supported KD + SAHI Half-Body (p=0.25) + Head/Distal Sharpened Sigma + Hard8 + OKS-Coord (prod).",
+  "quality_head": false,
+  "samples_per_epoch": 32000,
+  "save_best_weights": true,
+  "save_weights_from_epoch": 1,
+  "seed": 20261005,
+  "strong_augmentation": {
+    "blur_prob": 0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "color_jitter": {
+      "brightness_delta": 32,
+      "channel_swap_prob": 0,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18,
+      "prob": 0,
+      "saturation_range": [
+        0.5,
+        1.5
+      ]
+    },
+    "half_body_min_lower": 3,
+    "half_body_min_side_frac": 0.5,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_padding": 1.45,
+    "half_body_prob": 0.25,
+    "half_body_upper_prob": 0.6,
+    "hole_max_frac": 0.4,
+    "hole_min_frac": 0.1,
+    "hole_prob": 0,
+    "median_blur_prob": 0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0,
+    "noise_sigma": [
+      3,
+      10
+    ],
+    "note": "Wave-7 SAHI-aligned Half-Body (p=0.25, pad=1.45, min_side=0.50) + Multi-Scale (p=0.20) + Truncation (p=0.15).",
+    "rotate_deg": 40,
+    "rotate_prob": 0,
+    "scale_prob": 0.2,
+    "scale_range": [
+      0.75,
+      1.2
+    ],
+    "seed": 20261977,
+    "shift_frac": 0.16,
+    "shift_prob": 0,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_min_labelled": 4,
+    "truncation_prob": 0.15,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_side_prob": 0.2
+  },
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "vit_arch": "vit_l",
+  "vit_image_size": 384,
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 2
+}

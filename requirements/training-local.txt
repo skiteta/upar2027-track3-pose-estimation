@@ -1,0 +1,15 @@
+# Observed working local training stack, not the official inference container.
+# Python 3.12; torch/torchvision CUDA wheels from the official cu128 index.
+torch==2.7.0
+torchvision==0.22.0
+numpy==1.26.4
+Pillow==10.2.0
+pycocotools==2.0.10
+mmcv==1.7.2
+opencv-python-headless==4.10.0.84
+addict==2.4.0
+yapf==0.40.2
+packaging==25.0
+PyYAML==6.0.2
+tomli==2.2.1
+# No mmcv-full custom CUDA operators are used by the shipped RSN/ViT paths.

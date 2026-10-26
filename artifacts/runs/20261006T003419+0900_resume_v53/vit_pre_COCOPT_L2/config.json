@@ -1,0 +1,103 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl_cocomae_pose_pretrain_coco_pt18_long_v57",
+  "coco_annotation_files": [
+    "data/external/coco/annotations/person_keypoints_train2017.json"
+  ],
+  "coco_image_dirs": {
+    "data/external/coco/annotations/person_keypoints_train2017.json": "external/coco/train2017"
+  },
+  "coco_min_box_height": 32,
+  "coco_min_labelled": 6,
+  "coco_source": "Official COCO 2017 person_keypoints_train2017 + train2017 images (images.cocodataset.org); Terms 3 permit COCO pre-training.",
+  "config_sha256": "e48359013c4556560e1f7d2ecc6a60906bb6ad4dc6940038461494183ce255e4",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "evaluate_initial": false,
+  "evaluation_role": "development",
+  "event_path": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L2_event.json",
+  "expected_train_examples": 140550,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "coco": 0.75,
+    "posetrack18": 0.25
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L/epoch_005_weights.pt",
+  "init_checkpoint_sha256": "109c8100011f5d87b39db95e9dea2a5e6d234e0b737d2749db38fac5230a6b2a",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "Continuation of vit_pre_COCOPT_L (5 x 48k) with a fresh optimizer; same COCO 2017 + PoseTrack18 population and shares.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      8,
+      3e-05
+    ]
+  ],
+  "max_epochs": 10,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L2",
+  "person_paste_probability": 0.35,
+  "posetrack18_annotation_files": [
+    "data/external/posetrack18/annotations/posetrack18_train.json",
+    "data/external/posetrack18/annotations/posetrack18_val.json"
+  ],
+  "posetrack18_min_box_height": 32,
+  "posetrack18_min_labelled": 6,
+  "posetrack18_require_image": true,
+  "posetrack18_source": "Official mmpose-converted PoseTrack18 annotations (download.openmmlab.com) + official image tar parts aa/ab (owner andriluk/schiele) from the Hyper.AI figshare mirror; the mirror is truncated, so only persons whose image exists are used.",
+  "precision": "bf16",
+  "purpose": "H2 extension: does a longer COCO+PoseTrack18 keypoint pre-training (5 + 10 x 48k, about 6 passes of the 140k persons) further improve unseen-camera AP after fine-tuning? Stage-1 zero-shot hard5 rose 0.808 -> 0.838 and H2 gave +0.0044 after fine-tuning.",
+  "samples_per_epoch": 48000,
+  "save_weights_from_epoch": 8,
+  "seed": 20261008,
+  "train_domains": [
+    "coco",
+    "posetrack18"
+  ],
+  "train_examples": 140550,
+  "train_population": {
+    "coco": 123202,
+    "posetrack18": 17348
+  },
+  "vit_arch": "vit_l",
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

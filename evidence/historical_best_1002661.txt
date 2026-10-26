@@ -1,0 +1,18 @@
+
+----------------------------------------------
+Scoring Program started!
+----------------------------------------------
+
+[score] task=hpe prefix= gt=ground_truth.json images=30245
+[score] loaded 30245 usable detection(s) from predictions.json
+[score] pycocotools unavailable. using the bundled fallback evaluator.
+[score] scores: {"AP": 0.903147, "AP50": 0.971458, "AP75": 0.937805, "AP_medium": 0.877457, "AP_large": 0.690874, "AR": 0.922001, "AR50": 0.980662, "AR75": 0.951118, "AR_medium": 0.9077, "AR_large": 0.698732, "duration": 10.41}
+
+---------------------------------
+[OK] Total duration: 10.41s
+---------------------------------
+
+----------------------------------------------
+[OK] Scoring Program executed successfully!
+----------------------------------------------
+

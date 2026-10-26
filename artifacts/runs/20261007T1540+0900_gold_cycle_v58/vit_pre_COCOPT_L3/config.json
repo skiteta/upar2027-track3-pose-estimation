@@ -1,0 +1,106 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl_cocomae_pose_pretrain_coco_pt18_l3_v58",
+  "coco_annotation_files": [
+    "data/external/coco/annotations/person_keypoints_train2017.json"
+  ],
+  "coco_image_dirs": {
+    "data/external/coco/annotations/person_keypoints_train2017.json": "external/coco/train2017"
+  },
+  "coco_min_box_height": 32,
+  "coco_min_labelled": 6,
+  "coco_source": "Official COCO 2017 person_keypoints_train2017 + train2017 images (images.cocodataset.org); Terms 3 permit COCO pre-training.",
+  "config_sha256": "2daf590a4a2793beb887b8fe2190ea6543ca354c92258ccb421e27d6fa5c9cd9",
+  "data_seed": 20261903,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 4,
+  "evaluate_every": 5,
+  "evaluate_initial": false,
+  "evaluation_role": "development",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L3_event.json",
+  "expected_train_examples": 140550,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "coco": 0.75,
+    "posetrack18": 0.25
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261006T003419+0900_resume_v53/vit_pre_COCOPT_L2/epoch_010_weights.pt",
+  "init_checkpoint_sha256": "545ed4aadf5b279453d74b098a2f75d7c31e4d533c129482724cb2362c6f918d",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "Continuation of vit_pre_COCOPT_L2 e10 (5 + 10 x 48k) with a fresh optimizer; same COCO 2017 + PoseTrack18 population and shares.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      17,
+      3e-05
+    ]
+  ],
+  "max_epochs": 20,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L3",
+  "person_paste_probability": 0.35,
+  "posetrack18_annotation_files": [
+    "data/external/posetrack18/annotations/posetrack18_train.json",
+    "data/external/posetrack18/annotations/posetrack18_val.json"
+  ],
+  "posetrack18_min_box_height": 32,
+  "posetrack18_min_labelled": 6,
+  "posetrack18_require_image": true,
+  "posetrack18_source": "Official mmpose-converted PoseTrack18 annotations (download.openmmlab.com) + official image tar parts aa/ab (owner andriluk/schiele) from the Hyper.AI figshare mirror; the mirror is truncated, so only persons whose image exists are used.",
+  "precision": "bf16",
+  "purpose": "G2 extension (gold_hypotheses_v58): zero-shot hard5 still rose at L2 e6 (0.8400 -> 0.8496); 20 more x 48k (about 7 further passes of the 140k persons) for the production ViT-L encoder.",
+  "samples_per_epoch": 48000,
+  "save_weights_from_epoch": 15,
+  "seed": 20261058,
+  "train_domains": [
+    "coco",
+    "posetrack18"
+  ],
+  "train_examples": 140550,
+  "train_population": {
+    "coco": 123202,
+    "posetrack18": 17348
+  },
+  "vit_arch": "vit_l",
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

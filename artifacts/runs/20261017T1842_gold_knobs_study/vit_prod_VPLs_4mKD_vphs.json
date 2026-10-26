@@ -1,0 +1,196 @@
+{
+  "batch_size": 32,
+  "data_seed": 20261903,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "heatmap_sigma": 2,
+  "input_size": [
+    256,
+    256
+  ],
+  "person_paste_probability": 0.35,
+  "precision": "bf16",
+  "seed": 20261005,
+  "weight_decay": 0.1,
+  "allocator_cap_gib": 30,
+  "learning_rate": 1e-05,
+  "samples_per_epoch": 32000,
+  "max_epochs": 3,
+  "eval_batch_size": 8,
+  "workers": 4,
+  "domain_mapping": "peta_file_mapping.txt",
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "candidate": "upar_vitl384_VPLs_4mKD_vphs_prod_v99",
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "expected_train_examples": 42736,
+  "evaluation_role": "train_diagnostic",
+  "evaluate_initial": false,
+  "purpose": "Production arm: 3-epoch GT-supported KD (lambda=0.5) into vit_prod_VPLs_384_TR e12 from the production 4-member teacher (rsn_prod_FB_TR e8 w=3 + vit_prod_VITLP3_384_TR e12 w=2 + vit_prod_VPLs_384_TR e12 w=1.25 + vit_prod_VPHs_256 e6 w=1.25).",
+  "output_dir": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_4mKD_vphs",
+  "event_path": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_4mKD_vphs_event.json",
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/TownCentre": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/3DPeS": 0.05,
+    "peta/MIT": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/PRID": 0.05,
+    "peta/i-LID": 0.05,
+    "peta/GRID": 0.05,
+    "peta/SARC3D": 0.05
+  },
+  "vit_arch": "vit_l",
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLs_384_TR/last_checkpoint.pt",
+  "init_checkpoint_sha256": "90220cba45c3eaf2a7c9060de876417becd618fa0510e4c1f40ee571961219a0",
+  "drop_path": 0.4,
+  "layer_decay": 0.8,
+  "model_type": "vit",
+  "init_mode": "checkpoint",
+  "warmup_epochs": 1,
+  "lr_schedule": [],
+  "grad_clip": 1,
+  "init_note": "New revision from VPLs dev e12: exact model and AdamW moments/step preserved; new constant LR schedule starts at revision epoch 1. Seed values retained but RNG/sampler/worker streams restart, not an exact epoch-13 resume.",
+  "quality_head": false,
+  "vit_image_size": 384,
+  "grad_checkpoint": true,
+  "eval_workers": 4,
+  "save_weights_from_epoch": 1,
+  "evaluate_every": 3,
+  "strong_augmentation": {
+    "note": "Truncation-only arm: all strong_augmentation probabilities 0 except test-like truncation (0.15, keep 0.45-0.85; side 0.2).",
+    "seed": 20261977,
+    "rotate_prob": 0,
+    "rotate_deg": 40,
+    "scale_prob": 0,
+    "scale_range": [
+      0.65,
+      1.35
+    ],
+    "shift_prob": 0,
+    "shift_frac": 0.16,
+    "half_body_prob": 0,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_min_lower": 3,
+    "half_body_padding": 1.5,
+    "half_body_upper_prob": 0.7,
+    "half_body_min_side_frac": 0.3,
+    "color_jitter": {
+      "prob": 0,
+      "brightness_delta": 32,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "saturation_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18,
+      "channel_swap_prob": 0
+    },
+    "hole_prob": 0,
+    "hole_min_frac": 0.1,
+    "hole_max_frac": 0.4,
+    "blur_prob": 0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "median_blur_prob": 0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0,
+    "noise_sigma": [
+      3,
+      10
+    ],
+    "truncation_prob": 0.15,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_side_prob": 0.2,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_min_labelled": 4
+  },
+  "save_best_weights": true,
+  "distill": {
+    "lambda": 0.5,
+    "supervision": "gt_supported",
+    "teachers": [
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/rsn_prod_FB_TR.json",
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/rsn_prod_FB_TR/epoch_008_weights.pt",
+        "sha256": "23ceea0f40b876d9e4b34ecee22382acddde5317bde769f7ff2f2c2cfa8f5547",
+        "weight": 3.0
+      },
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP3_384_TR.json",
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP3_384_TR/epoch_012_weights.pt",
+        "sha256": "e69ccd21043a009d60ae3f8e4338ddd45e9fe16281d59058e824dc4cebbb7c07",
+        "weight": 2.0
+      },
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLs_384_TR.json",
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLs_384_TR/epoch_012_weights.pt",
+        "sha256": "ec8b1ad4a81200909a03d895173e604b2e9f0754fa48593e77b5a0798cb2b129",
+        "weight": 1.25
+      },
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256.json",
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256/epoch_006_weights.pt",
+        "sha256": "399a804a938f3584a988abf95042b0de37a642a4fdae6f6ee8534dbacb034f01",
+        "weight": 1.25
+      }
+    ],
+    "note": "Fixed F development teachers, weights 2:2:1, applied to the single augmented training view. Resize to student 96 grid, normalize each member/joint by peak, weighted average then clamp nonnegative. This is not deployed TTA fusion. KD uses fixed scored-joint divisor 15 in both arms, no valid-count normalization. D projects the detached nonnegative teacher map onto exact nonzero support of actual configured GT Gaussian, without peak renormalization. Detached gate is retained positive mass / total positive mass, times original GT weights > 0 and scored mask; zero mass gives zero gate. Keep fixed divisor 15 and full spatial MSE. Occluded v1 remains labelled. Not annotation correction."
+  },
+  "fit_includes_heldout": true
+}

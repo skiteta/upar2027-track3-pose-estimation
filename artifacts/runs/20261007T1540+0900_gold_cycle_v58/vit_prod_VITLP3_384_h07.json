@@ -1,0 +1,126 @@
+{
+ "batch_size": 32,
+ "data_seed": 20261903,
+ "factor_synthesis": {
+  "held_out_pairs": [
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    4
+   ]
+  ],
+  "mode": "uniform",
+  "pair_fraction": 0.25,
+  "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+  "seed": 20261039,
+  "single_fraction": 0.25,
+  "unchanged_fraction": 0.5
+ },
+ "heatmap_sigma": 2,
+ "input_size": [
+  256,
+  256
+ ],
+ "person_paste_probability": 0.35,
+ "precision": "bf16",
+ "seed": 20261005,
+ "weight_decay": 0.1,
+ "allocator_cap_gib": 30.0,
+ "learning_rate": 0.0001,
+ "samples_per_epoch": 32000,
+ "max_epochs": 12,
+ "eval_batch_size": 8,
+ "workers": 4,
+ "domain_mapping": "peta_file_mapping.txt",
+ "heldout_subdomains": [
+  "CAVIAR4REID",
+  "PRID",
+  "i-LID",
+  "GRID",
+  "SARC3D"
+ ],
+ "candidate": "upar_vitl384_L3_allsource_h07_v60",
+ "train_domains": [
+  "market",
+  "pa100k",
+  "peta"
+ ],
+ "peta_train_subdomains": [
+  "TownCentre",
+  "CUHK",
+  "VIPeR",
+  "3DPeS",
+  "MIT",
+  "CAVIAR4REID",
+  "PRID",
+  "i-LID",
+  "GRID",
+  "SARC3D"
+ ],
+ "expected_train_examples": 42736,
+ "evaluation_role": "train_diagnostic",
+ "evaluate_initial": false,
+ "purpose": "vit_prod_VITLP3_384 plus head-joint targets at 0.7 sigma (K5 knob), for a head-sharpened L3 soup main member; launched ahead of the dev verdict on free VRAM (owner 2026-10-11 14:10).",
+ "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP3_384_h07",
+ "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP3_384_h07_event.json",
+ "group_sampling_weights": {
+  "market": 0.25,
+  "pa100k": 0.25,
+  "peta/TownCentre": 0.05,
+  "peta/CUHK": 0.05,
+  "peta/VIPeR": 0.05,
+  "peta/3DPeS": 0.05,
+  "peta/MIT": 0.05,
+  "peta/CAVIAR4REID": 0.05,
+  "peta/PRID": 0.05,
+  "peta/i-LID": 0.05,
+  "peta/GRID": 0.05,
+  "peta/SARC3D": 0.05
+ },
+ "vit_arch": "vit_l",
+ "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L3/epoch_020_weights.pt",
+ "init_checkpoint_sha256": "32aaf8d85bccac21cfe0f63a20e4e3b072a44ede9c7a3a611471c556af7f5794",
+ "drop_path": 0.4,
+ "layer_decay": 0.8,
+ "model_type": "vit",
+ "init_mode": "weights",
+ "warmup_epochs": 1,
+ "lr_schedule": [
+  [
+   9,
+   3e-05
+  ]
+ ],
+ "grad_clip": 1.0,
+ "init_note": "COCO-only MAE ViT-L -> COCO 2017 + PoseTrack18 keypoint pre-training 5 + 10 + 20 x 48k (L3 e20).",
+ "quality_head": false,
+ "fit_includes_heldout": true,
+ "save_weights_from_epoch": 12,
+ "vit_image_size": 384,
+ "grad_checkpoint": true,
+ "eval_workers": 4,
+ "evaluate_every": 12,
+ "heatmap_sigma_joint_scale": [
+  0.7,
+  0.7,
+  0.7,
+  0.7,
+  0.7,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0
+ ],
+ "early_vram_reserve_gib": 8
+}

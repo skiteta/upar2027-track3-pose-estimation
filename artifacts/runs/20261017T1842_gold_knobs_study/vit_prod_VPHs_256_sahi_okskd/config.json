@@ -1,0 +1,277 @@
+{
+  "allocator_cap_gib": 24.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitposeH256_sahi_okskd_prod_v107",
+  "config_sha256": "4db2b2344b8e8211efe04bf6db724b2ed70c457ac93518805a9d3595ee0a9668",
+  "coord_loss": {
+    "norm": "euclidean",
+    "oks_scaled": true,
+    "scale_fraction": 0.5,
+    "smooth": 0.25,
+    "temperature": 10.0,
+    "type": "l1",
+    "weight": 0.004,
+    "window": 6.0
+  },
+  "data_seed": 20261903,
+  "distill": {
+    "lambda": 0.5,
+    "note": "Wave-7 Gen-3 5-Teacher GT-supported KD into ViTPose-Huge 632M with SAHI Half-Body & Sharper Head/Distal Sigma.",
+    "supervision": "gt_supported",
+    "teachers": [
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/rsn_prod_FB_hard8_okskd.json",
+        "sha256": "297a3a9f6734b4d6b55056bef3bf776ccd792317b3034f77b854a07237185f23",
+        "weight": 2.0,
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_RSN_v106_5050_prod_weights.pt"
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_L3soup_hard8_okskd.json",
+        "sha256": "81a4b9f791c586f8b12775ab6eb55cfb3f366d3c2b2764f6a2e2da455ab5688a",
+        "weight": 2.0,
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_L3_v106_e12_prod_weights.pt"
+      },
+      {
+        "config": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPLs_hard8_okskd.json",
+        "sha256": "03e276f5d306d7141bcf9ce709822ab175fc30c8d4a369d06d90964f34b7c6c7",
+        "weight": 2.0,
+        "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v106/soup_VP_v106_7030_prod_weights.pt"
+      },
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256.json",
+        "sha256": "0ffdcea2c5cc55a91724ff59db023ff27a04a1529e80f36b79f94f0331ab77b9",
+        "weight": 1.5,
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256_J_TR/last_checkpoint.pt"
+      },
+      {
+        "config": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP4_384_s2.json",
+        "sha256": "f4649951231d9dfaa088c9a99da63a87ef56ecb56775456ff8c70d414ceb17c9",
+        "weight": 1.0,
+        "weights": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VITLP4_384_s2/epoch_012_weights.pt"
+      }
+    ]
+  },
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.5,
+  "early_vram_reserve_gib": 6,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 2,
+  "evaluate_every": 2,
+  "evaluate_initial": false,
+  "evaluation_role": "train_diagnostic",
+  "event_path": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPHs_256_sahi_okskd_event.json",
+  "expected_train_examples": 42736,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "fit_includes_heldout": true,
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/3DPeS": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/GRID": 0.05,
+    "peta/MIT": 0.05,
+    "peta/PRID": 0.05,
+    "peta/SARC3D": 0.05,
+    "peta/TownCentre": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/i-LID": 0.05
+  },
+  "hard_joint": {
+    "keep": 8,
+    "mix": 0.4
+  },
+  "heatmap_sigma": 2,
+  "heatmap_sigma_joint_scale": [
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    0.75,
+    1.0,
+    1.0,
+    0.95,
+    0.95,
+    0.85,
+    0.85,
+    1.0,
+    1.0,
+    0.95,
+    0.95,
+    0.9,
+    0.9
+  ],
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPHs_256_J_TR/last_checkpoint.pt",
+  "init_checkpoint_sha256": "0ffdcea2c5cc55a91724ff59db023ff27a04a1529e80f36b79f94f0331ab77b9",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "COCO-only MAE ViT-L -> COCO 2017 + PoseTrack18 keypoint pre-training 5 + 10 + 20 x 48k (L3 e20).",
+  "input_size": [
+    256,
+    256
+  ],
+  "joint_loss_weights": [
+    3.0,
+    3.0,
+    3.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.25,
+    1.25,
+    1.8,
+    1.8,
+    1.0,
+    1.0,
+    1.25,
+    1.25,
+    1.6,
+    1.6
+  ],
+  "layer_decay": 0.85,
+  "learning_rate": 8e-06,
+  "lr_schedule": [],
+  "max_epochs": 2,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261017T1842_gold_knobs_study/vit_prod_VPHs_256_sahi_okskd",
+  "person_paste_probability": 0.35,
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "precision": "bf16",
+  "purpose": "Wave-7 ViTPose-Huge (632M) first-ever Gen-3 5-Teacher GT-supported KD + SAHI Half-Body (p=0.25) + Head/Distal Sharpened Sigma + Hard8 + OKS-Coord (prod).",
+  "quality_head": false,
+  "samples_per_epoch": 32000,
+  "save_best_weights": true,
+  "save_weights_from_epoch": 1,
+  "seed": 20261005,
+  "strong_augmentation": {
+    "blur_prob": 0.0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "color_jitter": {
+      "brightness_delta": 32.0,
+      "channel_swap_prob": 0.0,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18.0,
+      "prob": 0.0,
+      "saturation_range": [
+        0.5,
+        1.5
+      ]
+    },
+    "half_body_min_lower": 3,
+    "half_body_min_side_frac": 0.5,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_padding": 1.45,
+    "half_body_prob": 0.25,
+    "half_body_upper_prob": 0.6,
+    "hole_max_frac": 0.4,
+    "hole_min_frac": 0.1,
+    "hole_prob": 0.0,
+    "median_blur_prob": 0.0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0.0,
+    "noise_sigma": [
+      3.0,
+      10.0
+    ],
+    "note": "Wave-7 SAHI-aligned Half-Body (p=0.25, pad=1.45, min_side=0.50) + Multi-Scale (p=0.20) + Truncation (p=0.15).",
+    "rotate_deg": 40.0,
+    "rotate_prob": 0.0,
+    "scale_prob": 0.2,
+    "scale_range": [
+      0.75,
+      1.2
+    ],
+    "seed": 20261977,
+    "shift_frac": 0.16,
+    "shift_prob": 0.0,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_min_labelled": 4,
+    "truncation_prob": 0.15,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_side_prob": 0.2
+  },
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "train_examples": 42736,
+  "train_population": {
+    "market": 12923,
+    "pa100k": 19499,
+    "peta/3DPeS": 614,
+    "peta/CAVIAR4REID": 626,
+    "peta/CUHK": 2289,
+    "peta/GRID": 705,
+    "peta/MIT": 543,
+    "peta/PRID": 638,
+    "peta/SARC3D": 113,
+    "peta/TownCentre": 3820,
+    "peta/VIPeR": 734,
+    "peta/i-LID": 232
+  },
+  "vit_arch": "vit_h",
+  "vit_image_size": 256,
+  "vit_patch_padding": 0,
+  "vit_with_cls_token": true,
+  "warmup_epochs": 1,
+  "warmup_mode": "linear_steps",
+  "weight_decay": 0.1,
+  "workers": 2
+}

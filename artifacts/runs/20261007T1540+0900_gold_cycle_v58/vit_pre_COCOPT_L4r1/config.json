@@ -1,0 +1,108 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl_cocomae_pose_pretrain_coco_pt18_l4_v59",
+  "coco_annotation_files": [
+    "data/external/coco/annotations/person_keypoints_train2017.json"
+  ],
+  "coco_image_dirs": {
+    "data/external/coco/annotations/person_keypoints_train2017.json": "external/coco/train2017"
+  },
+  "coco_min_box_height": 32,
+  "coco_min_labelled": 6,
+  "coco_source": "Official COCO 2017 person_keypoints_train2017 + train2017 images (images.cocodataset.org); Terms 3 permit COCO pre-training.",
+  "config_sha256": "fe190d70c830f9c4d55a564fb1d26ec0d0aa2b05b8e3957acd0378de38353be2",
+  "data_seed": 20261904,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "early_vram_reserve_gib": 6.5,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 4,
+  "evaluate_every": 5,
+  "evaluate_initial": false,
+  "evaluation_role": "development",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L4r1_event.json",
+  "expected_train_examples": 140550,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "coco": 0.75,
+    "posetrack18": 0.25
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L3/epoch_020_weights.pt",
+  "init_checkpoint_sha256": "32aaf8d85bccac21cfe0f63a20e4e3b072a44ede9c7a3a611471c556af7f5794",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "Continuation of L3 (35 x 48k: COCO-only MAE -> COCO 2017 + PoseTrack18 keypoint pre-training) by 20 x 48k with the same recipe (warm-up 1, LR drop at 17): L4 = 55 x 48k.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 0.0001,
+  "lr_schedule": [
+    [
+      17,
+      3e-05
+    ]
+  ],
+  "max_epochs": 20,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_COCOPT_L4r1",
+  "person_paste_probability": 0.35,
+  "posetrack18_annotation_files": [
+    "data/external/posetrack18/annotations/posetrack18_train.json",
+    "data/external/posetrack18/annotations/posetrack18_val.json"
+  ],
+  "posetrack18_min_box_height": 32,
+  "posetrack18_min_labelled": 6,
+  "posetrack18_require_image": true,
+  "posetrack18_source": "Official mmpose-converted PoseTrack18 annotations (download.openmmlab.com) + official image tar parts aa/ab (owner andriluk/schiele) from the Hyper.AI figshare mirror; the mirror is truncated, so only persons whose image exists are used.",
+  "precision": "bf16",
+  "purpose": "L4 keypoint pre-training: 971939 showed +0.0020 Public for L3 over L2 (3x its fused dev gain). Same data (COCO 2017 + PoseTrack18 only, Terms 3), recipe and schedule as L3; new seeds for a fresh data order.",
+  "revision_note": "r1 of vit_pre_COCOPT_L4 (identical recipe). The first launch 20261010T114036442936 died at model.cuda() with CUDA OOM before any step because a concurrent launcher on the shared GPU took the free memory during setup; r1 claims 6.5 GiB at process start (audit peak reserved 5.67 GiB).",
+  "samples_per_epoch": 48000,
+  "save_weights_from_epoch": 15,
+  "seed": 20261059,
+  "train_domains": [
+    "coco",
+    "posetrack18"
+  ],
+  "train_examples": 140550,
+  "train_population": {
+    "coco": 123202,
+    "posetrack18": 17348
+  },
+  "vit_arch": "vit_l",
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

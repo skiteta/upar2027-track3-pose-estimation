@@ -1,0 +1,112 @@
+{
+  "allocator_cap_gib": 30.0,
+  "audit_only": false,
+  "batch_size": 32,
+  "candidate": "upar_vitl_vitposeL_L3struct_pt18x_pretrain_v88",
+  "coco_annotation_files": [
+    "data/external/coco/annotations/person_keypoints_train2017.json"
+  ],
+  "coco_image_dirs": {
+    "data/external/coco/annotations/person_keypoints_train2017.json": "external/coco/train2017"
+  },
+  "coco_min_box_height": 32,
+  "coco_min_labelled": 6,
+  "coco_source": "Official COCO 2017 person_keypoints_train2017 + train2017 images (images.cocodataset.org); Terms 3 permit COCO pre-training.",
+  "config_sha256": "2a2b2cf0af9da332769355c4265eed08cfbd7aa8d8639e9098d1fcef924ff629",
+  "data_seed": 20261978,
+  "domain_mapping": "peta_file_mapping.txt",
+  "drop_path": 0.4,
+  "early_vram_reserve_gib": 8,
+  "eval_batch_size": 8,
+  "eval_persons": 2314,
+  "eval_workers": 4,
+  "evaluate_every": 6,
+  "evaluate_initial": false,
+  "evaluation_role": "development",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_VPLs_PT18x_event.json",
+  "expected_train_examples": 198798,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "grad_checkpoint": true,
+  "grad_clip": 1.0,
+  "group_sampling_weights": {
+    "coco": 0.75,
+    "posetrack18": 0.25
+  },
+  "heatmap_sigma": 2,
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vitpose_in1k_coco/20261015T2035_vitposeL_coco_grid24_L3struct.pt",
+  "init_checkpoint_sha256": "405a711e076fcb0dbcf193e200dd6c31201dbab80caa1728efbe884fae1f3b77",
+  "init_epoch": 0,
+  "init_mode": "weights",
+  "init_note": "ImageNet-1K MAE -> MMPose ViTPose-L COCO 210e, transplanted into the L3 graph (20261015T2035_vitposeL_coco_grid24_L3struct.pt; position grid resized 24 -> 16 at load) -> this stage.",
+  "input_size": [
+    256,
+    256
+  ],
+  "layer_decay": 0.8,
+  "learning_rate": 5e-05,
+  "lr_schedule": [
+    [
+      5,
+      1.5e-05
+    ]
+  ],
+  "max_epochs": 6,
+  "model_type": "vit",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_pre_VPLs_PT18x",
+  "person_paste_probability": 0.35,
+  "posetrack18_annotation_files": [
+    "data/external/posetrack18/annotations/posetrack18_train.json",
+    "data/external/posetrack18/annotations/posetrack18_val.json"
+  ],
+  "posetrack18_image_roots": [
+    "external/posetrack18",
+    "external/posetrack18_from_pt17"
+  ],
+  "posetrack18_min_box_height": 32,
+  "posetrack18_min_labelled": 6,
+  "posetrack18_require_image": true,
+  "posetrack18_source": "Official mmpose-converted PoseTrack18 annotations (download.openmmlab.com) + official image tar parts aa/ab (owner andriluk/schiele) from the Hyper.AI figshare mirror; the mirror is truncated, so only persons whose image exists are used. PLUS official PoseTrack 2017 frames from the MPI server (posetrack.mpi-inf.mpg.de, owner approval 2026-10-11) mapped to PT18 names (PT18 frame k = PT17 frame k+1, verified pixel-identical on 57 overlapping videos), placed under data/external/posetrack18_from_pt17 (20261011T2230_pt17_to_pt18_place.json).",
+  "precision": "bf16",
+  "purpose": "Keypoint pre-training stage on COCO + expanded PoseTrack18 (COCO:PT18 75:25, as vit_pre_VITPOSEH_PT18x) for the transplanted ViTPose-L in the L3 graph (patch padding 0, cls token), before the L3+TR organiser fine-tune. ViTPose-H gained +0.0016 single from the same stage (e6 0.9023 -> 0.9039).",
+  "revision_note": "New stage (v68). 10 x 48k at lr 5e-5 (ViTPose already trained 210 COCO epochs), drop at 8.",
+  "samples_per_epoch": 48000,
+  "save_weights_from_epoch": 6,
+  "seed": 20261168,
+  "train_domains": [
+    "coco",
+    "posetrack18"
+  ],
+  "train_examples": 198798,
+  "train_population": {
+    "coco": 123202,
+    "posetrack18": 75596
+  },
+  "vit_arch": "vit_l",
+  "warmup_epochs": 1,
+  "weight_decay": 0.1,
+  "workers": 4
+}

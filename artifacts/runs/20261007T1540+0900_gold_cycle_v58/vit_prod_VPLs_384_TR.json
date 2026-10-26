@@ -1,0 +1,169 @@
+{
+  "batch_size": 32,
+  "data_seed": 20261903,
+  "factor_synthesis": {
+    "held_out_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ]
+    ],
+    "mode": "uniform",
+    "pair_fraction": 0.25,
+    "scope": "Extra factors after unchanged parent crop/flip/photometry/personpaste0.35. Fixed strength law and RNG stream. No PETA residual calibration.",
+    "seed": 20261039,
+    "single_fraction": 0.25,
+    "unchanged_fraction": 0.5
+  },
+  "heatmap_sigma": 2,
+  "input_size": [
+    256,
+    256
+  ],
+  "person_paste_probability": 0.35,
+  "precision": "bf16",
+  "seed": 20261005,
+  "weight_decay": 0.1,
+  "allocator_cap_gib": 30.0,
+  "learning_rate": 0.0001,
+  "samples_per_epoch": 32000,
+  "max_epochs": 12,
+  "eval_batch_size": 8,
+  "workers": 4,
+  "domain_mapping": "peta_file_mapping.txt",
+  "heldout_subdomains": [
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "candidate": "upar_vitl384_vitposeL_L3struct_truncaug_allsource_v84",
+  "train_domains": [
+    "market",
+    "pa100k",
+    "peta"
+  ],
+  "peta_train_subdomains": [
+    "TownCentre",
+    "CUHK",
+    "VIPeR",
+    "3DPeS",
+    "MIT",
+    "CAVIAR4REID",
+    "PRID",
+    "i-LID",
+    "GRID",
+    "SARC3D"
+  ],
+  "expected_train_examples": 42736,
+  "evaluation_role": "train_diagnostic",
+  "evaluate_initial": false,
+  "purpose": "Production: the transplanted ViTPose-L (L3 graph) with the L3+TR recipe on all organiser data; packaged only if the dev analogue beats E-L3TR with a CI excluding 0 (run.py code of 987496).",
+  "output_dir": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLs_384_TR",
+  "event_path": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vit_prod_VPLs_384_TR_event.json",
+  "group_sampling_weights": {
+    "market": 0.25,
+    "pa100k": 0.25,
+    "peta/TownCentre": 0.05,
+    "peta/CUHK": 0.05,
+    "peta/VIPeR": 0.05,
+    "peta/3DPeS": 0.05,
+    "peta/MIT": 0.05,
+    "peta/CAVIAR4REID": 0.05,
+    "peta/PRID": 0.05,
+    "peta/i-LID": 0.05,
+    "peta/GRID": 0.05,
+    "peta/SARC3D": 0.05
+  },
+  "vit_arch": "vit_l",
+  "init_checkpoint": "artifacts/runs/20261007T1540+0900_gold_cycle_v58/vitpose_in1k_coco/20261015T2035_vitposeL_coco_grid24_L3struct.pt",
+  "init_checkpoint_sha256": "405a711e076fcb0dbcf193e200dd6c31201dbab80caa1728efbe884fae1f3b77",
+  "drop_path": 0.4,
+  "layer_decay": 0.8,
+  "model_type": "vit",
+  "init_mode": "weights",
+  "warmup_epochs": 1,
+  "lr_schedule": [
+    [
+      9,
+      3e-05
+    ]
+  ],
+  "grad_clip": 1.0,
+  "init_note": "ImageNet-1K MAE -> MMPose ViTPose-L COCO (210e) converted to this project (grid 24) and transplanted into the L3 graph (patch padding 0, cls token on).",
+  "quality_head": false,
+  "fit_includes_heldout": true,
+  "save_weights_from_epoch": 12,
+  "vit_image_size": 384,
+  "grad_checkpoint": true,
+  "eval_workers": 4,
+  "evaluate_every": 12,
+  "strong_augmentation": {
+    "note": "Truncation-only arm: all strong_augmentation probabilities 0 except test-like truncation (0.15, keep 0.45-0.85; side 0.2).",
+    "seed": 20261977,
+    "rotate_prob": 0.0,
+    "rotate_deg": 40.0,
+    "scale_prob": 0.0,
+    "scale_range": [
+      0.65,
+      1.35
+    ],
+    "shift_prob": 0.0,
+    "shift_frac": 0.16,
+    "half_body_prob": 0.0,
+    "half_body_min_total": 9,
+    "half_body_min_upper": 2,
+    "half_body_min_lower": 3,
+    "half_body_padding": 1.5,
+    "half_body_upper_prob": 0.7,
+    "half_body_min_side_frac": 0.3,
+    "color_jitter": {
+      "prob": 0.0,
+      "brightness_delta": 32.0,
+      "contrast_range": [
+        0.5,
+        1.5
+      ],
+      "saturation_range": [
+        0.5,
+        1.5
+      ],
+      "hue_delta": 18.0,
+      "channel_swap_prob": 0.0
+    },
+    "hole_prob": 0.0,
+    "hole_min_frac": 0.1,
+    "hole_max_frac": 0.4,
+    "blur_prob": 0.0,
+    "blur_sigma": [
+      0.5,
+      1.5
+    ],
+    "median_blur_prob": 0.0,
+    "median_sizes": [
+      3,
+      5
+    ],
+    "noise_prob": 0.0,
+    "noise_sigma": [
+      3.0,
+      10.0
+    ],
+    "truncation_prob": 0.15,
+    "truncation_keep": [
+      0.45,
+      0.85
+    ],
+    "truncation_side_prob": 0.2,
+    "truncation_side_keep": [
+      0.55,
+      0.85
+    ],
+    "truncation_min_labelled": 4
+  }
+}

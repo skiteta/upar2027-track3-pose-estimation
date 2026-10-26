@@ -1,0 +1,27 @@
+
+----------------------------------------------
+Ingestion Program started!
+----------------------------------------------
+
+[ingestion] task 'hpe': 30245 image(s), 30245 person box(es)
+[ingestion] entry point: run.predict_image()
+[ingestion] calling run.load_model()
+[submission] upar_fusion3_sahi_anat9_v109: 3-model fusion, 4 views + Gated-2Slice-SAHI on cuda
+[submission] CUDA graph replay for members [0]
+[submission] proportional SAHI controller: proj_wall=29901s after 20 images -> tier 3
+[submission] 0.670 s/image (roll=0.689s, wall=77.7s, tier=3) after 100 images; sampled member forward: model_rsn.torchscript 39.9 ms, model_l3.torchscript 53.4 ms, model_vp.torchscript 57.3 ms
+[submission] 0.620 s/image (roll=0.599s, wall=196.7s, tier=3) after 300 images; sampled member forward: model_rsn.torchscript 31.5 ms, model_l3.torchscript 44.0 ms, model_vp.torchscript 47.4 ms
+[submission] 0.601 s/image (roll=0.604s, wall=612.2s, tier=3) after 1000 images; sampled member forward: model_rsn.torchscript 28.8 ms, model_l3.torchscript 41.1 ms, model_vp.torchscript 44.5 ms
+[submission] 0.600 s/image (roll=0.601s, wall=1510.8s, tier=3) after 2500 images; sampled member forward: model_rsn.torchscript 28.2 ms, model_l3.torchscript 40.4 ms, model_vp.torchscript 43.9 ms
+[ingestion]   3024/30245 images, 1814.3s elapsed
+[submission] 0.604 s/image (roll=0.530s, wall=3028.5s, tier=3) after 5000 images; sampled member forward: model_rsn.torchscript 28.0 ms, model_l3.torchscript 40.3 ms, model_vp.torchscript 43.7 ms
+[ingestion]   6048/30245 images, 3667.0s elapsed
+[submission] 0.621 s/image (roll=0.741s, wall=4667.9s, tier=3) after 7500 images; sampled member forward: model_rsn.torchscript 27.9 ms, model_l3.torchscript 40.4 ms, model_vp.torchscript 43.8 ms
+[submission] runtime guard: roll=0.723s proj_wall=21121s at wall=5350s (image 8433) exceeds 6100s; centre padding only from here
+[submission] sampled member forward: model_rsn.torchscript 27.9 ms, model_l3.torchscript 40.4 ms, model_vp.torchscript 43.8 ms
+[submission] member-drop guard: 0.673 s/image (proj_wall=20040s) over 100 reduced images exceeds 0.210s / 6350s; dropping model_vp.torchscript (model_rsn.torchscript 27.8 ms, model_l3.torchscript 40.3 ms, model_vp.torchscript 43.6 ms (dropped))
+[submission] member-drop guard: 0.614 s/image (proj_wall=18755s) over 100 reduced images exceeds 0.210s / 6350s; dropping model_l3.torchscript (model_rsn.torchscript 27.8 ms, model_l3.torchscript 40.1 ms (dropped), model_vp.torchscript 43.1 ms (dropped))
+[ingestion]   9072/30245 images, 5650.0s elapsed
+[submission] 0.603 s/image (roll=0.400s, wall=6040.8s, tier=3) after 10000 images; sampled member forward: model_rsn.torchscript 27.1 ms, model_l3.torchscript 34.7 ms (dropped), model_vp.torchscript 37.2 ms (dropped)
+[ingestion]   12096/30245 images, 6887.2s elapsed
+[submission] 0.565 s/image (roll=0.421s, wall=7067.6s, tier=3) after 12500 images; sampled member forward: model_rsn.torchscript 26.2 ms, model_l3.torchscript 27.7 ms (dropped), model_vp.torchscript 29.8 ms (dropped)

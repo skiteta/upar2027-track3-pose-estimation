@@ -1,0 +1,167 @@
+{
+ "at": "2026-10-21T07:40:20.579074+00:00",
+ "candidate": "upar_fusion3_sahi_anat9_v110",
+ "source_sha256": "db4bba34ac6708e675295108010b2af68031da30be6f1cd0a43d46cfc5ce632c",
+ "template_sha256": "f52105580644ff9e2632c82e05fbb04dc1eaf97220d15650c3383cf8f39a1a08",
+ "members": [
+  {
+   "label": "rsn",
+   "export": {
+    "weights": "artifacts/runs/20261006T003419+0900_resume_v53/soup_eval/FB_soup_e4to7_weights.pt",
+    "weights_sha256": "3728055d616bf4258b003bfaab1aa81bed0cbcfc82cbe8443f22745369108992",
+    "epoch": "soup:artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB/epoch_004_weights.pt,artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB/epoch_005_weights.pt,artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB/epoch_006_weights.pt,artifacts/runs/20261006T003419+0900_resume_v53/rsn_arm_FB/epoch_007_weights.pt",
+    "init_epoch": null,
+    "model_sha256": "9df1ea685fb0c050640548a293948e424400d78f64a833a495622204bc252736",
+    "model_bytes": 122078376,
+    "fused_count": 649,
+    "fusion_error": 2.5033950805664062e-06,
+    "reload_error": 0.0019779354333877563,
+    "remaining_batchnorm_ops": 0,
+    "graph": {
+     "convolutions": 0,
+     "remaining_callmethod": 9,
+     "TF32_flags": {}
+    },
+    "torch": "2.7.0+cu128",
+    "stored_parameter_dtype": "float16"
+   }
+  },
+  {
+   "label": "l3",
+   "export": {
+    "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v109/soup_L3L4_v109_prod_weights.pt",
+    "weights_sha256": "ce7ff9dffc0987eeb96ffa1e71cf991fcbca05a9a2bc8c11a55c6c6dc091d46c",
+    "epoch": "soup_L3L4_v109_prod:0.82*soup_L3_v108_prod+0.18*soup_L4_v108_prod",
+    "init_epoch": null,
+    "model_type": "vit",
+    "architecture": "vit_l",
+    "grid": 24,
+    "patch_padding": 0,
+    "with_cls_token": true,
+    "explicit_patch_pad": false,
+    "stored_parameter_dtype": "float16",
+    "model_sha256": "724b89e8817e7966df54af7dac2e24be82b434d9551014c78e7419c234cb79f2",
+    "model_bytes": 618340866,
+    "reload_error_fp32_restored": 0.0005411505699157715,
+    "expected_peak_max": 0.991446316242218,
+    "graph": {
+     "convolutions": 4,
+     "remaining_callmethod": 120,
+     "TF32_flags": {
+      "False": 4
+     }
+    },
+    "torch": "2.4.1+cpu"
+   }
+  },
+  {
+   "label": "vp",
+   "export": {
+    "weights": "artifacts/runs/20261017T1842_gold_knobs_study/soups_v108/soup_VP_v108_prod_weights.pt",
+    "weights_sha256": "f2cf06f1c748c79bce4f80ebee0099fd29fa31ecb7afffab0be0ff4864a84f3d",
+    "epoch": "soup_VP_v108_prod:0.45*VP_v106_7030+0.25*w7+0.30*w8",
+    "init_epoch": null,
+    "model_type": "vit",
+    "architecture": "vit_l",
+    "grid": 24,
+    "patch_padding": 0,
+    "with_cls_token": true,
+    "explicit_patch_pad": false,
+    "stored_parameter_dtype": "float16",
+    "model_sha256": "983d57f33ffdb598decb416333bde597b40924f5908edd0d3d704a405bab58fd",
+    "model_bytes": 618340994,
+    "reload_error_fp32_restored": 0.0006142854690551758,
+    "expected_peak_max": 0.9960744380950928,
+    "graph": {
+     "convolutions": 4,
+     "remaining_callmethod": 120,
+     "TF32_flags": {
+      "False": 4
+     }
+    },
+    "torch": "2.4.1+cpu"
+   }
+  }
+ ],
+ "archive": {
+  "path": "artifacts/runs/20261017T1842_gold_knobs_study/package_fusion3_sahi_anat9_v110/upar_fusion3_sahi_anat9_v110.zip",
+  "sha256": "89658cb8c1feb90f2c3213a2242e0b76e5953c5de2e0a14f16b3292f6c468563",
+  "bytes": 1256255933,
+  "members": {
+   "LICENSE_MMPose.txt": {
+    "sha256": "aa2c6f3408169b96e5547c875deb481c91502514c1885fa0acb4b596c8909cb9",
+    "bytes": 11400
+   },
+   "metadata.yaml": {
+    "sha256": "6bf44083a3ab99e68efa2f4151cfec26d0a87876213011bc22061a031d24df23",
+    "bytes": 357
+   },
+   "model_meta.json": {
+    "sha256": "bff70a0189d432b34d570130cd81c7bb84c72670fa91e69aebc11436ba68b59d",
+    "bytes": 33424
+   },
+   "model_rsn.torchscript": {
+    "sha256": "9df1ea685fb0c050640548a293948e424400d78f64a833a495622204bc252736",
+    "bytes": 122078376
+   },
+   "model_l3.torchscript": {
+    "sha256": "724b89e8817e7966df54af7dac2e24be82b434d9551014c78e7419c234cb79f2",
+    "bytes": 618340866
+   },
+   "model_vp.torchscript": {
+    "sha256": "983d57f33ffdb598decb416333bde597b40924f5908edd0d3d704a405bab58fd",
+    "bytes": 618340994
+   },
+   "run.py": {
+    "sha256": "8d4459b6ef56bb41b1147cf36fa332ef82b1792305370c0bacd07294a44f14ea",
+    "bytes": 96078
+   }
+  },
+  "views": "v4",
+  "member_views": {
+   "rsn": "v4",
+   "l3": "v4",
+   "vp": "v4"
+  },
+  "model_weights": [
+   2.0,
+   2.35,
+   1.55
+  ]
+ },
+ "archive_validation": {
+  "returncode": 0,
+  "stdout_tail": "{\n  \"member_count\": 7,\n  \"metadata_sha256\": \"6bf44083a3ab99e68efa2f4151cfec26d0a87876213011bc22061a031d24df23\",\n  \"path\": \"/home/syouya/ml/lab/2d_human_pose_estimation/artifacts/runs/20261017T1842_gold_knobs_study/package_fusion3_sahi_anat9_v110/upar_fusion3_sahi_anat9_v110.zip\",\n  \"sha256\": \"89658cb8c1feb90f2c3213a2242e0b76e5953c5de2e0a14f16b3292f6c468563\",\n  \"size_bytes\": 1256255933\n}\n",
+  "stderr_tail": ""
+ },
+ "cpu_smoke": {
+  "graphs_torch241": {
+   "model_l3.torchscript": {
+    "convolutions": 4,
+    "remaining_callmethod": 0,
+    "TF32_flags": {
+     "False": 4
+    }
+   },
+   "model_rsn.torchscript": {
+    "convolutions": 627,
+    "remaining_callmethod": 0,
+    "TF32_flags": {
+     "False": 627
+    }
+   },
+   "model_vp.torchscript": {
+    "convolutions": 4,
+    "remaining_callmethod": 0,
+    "TF32_flags": {
+     "False": 4
+    }
+   }
+  },
+  "images": 4,
+  "max_abs_pixel_vs_dev_fusion": 11.315956115722656,
+  "max_abs_score_vs_dev_fusion": 0.027215795474710425,
+  "device": "cpu",
+  "torch": "2.4.1+cpu"
+ }
+}
