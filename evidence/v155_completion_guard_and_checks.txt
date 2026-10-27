@@ -41,5 +41,12 @@ Checks completed:
     k=1 about 4,180 s; k=3 about 6,490 s (the controller dropped the RSN member and alternated between the centre and
     the full mode); k=6 about 8,240 s (single-member centre mode), i.e. above the 7,200 s limit, which motivated the
     v155 guard.
-<<CHECK RESULTS v155 TO BE CONFIRMED>>
+Checks completed on the exact v155 archive (2026-10-27, local):
+  * First 150 images of the 3,346-image rehearsal input (before the controller's first decision at image 160): predictions
+    identical to the v154 archive (exact equality of all keypoints and scores).
+  * Guard trigger test: a copy with TEMPLATE_GUARD_SECONDS = 600 on a simulated 6x slower host engaged the template after
+    1,342 images; the remaining 2,004 images were answered by the template; 3,346/3,346 predictions, all finite, box ids matched.
+  * PyTorch 2.4.1 CPU smoke test: 6/6 images, finite outputs (181 s).
+  * Edge inputs (PyTorch 2.4.1 CPU): 12/12 cases passed (no boxes, 20 boxes, 2x3 px box, box partly/fully outside the image,
+    zero-width box, grayscale, RGBA, palette and JPEG images, 4000x3000 image).
 Not done: Docker image build; complete run of 30,245 images on the official hardware; official score.
