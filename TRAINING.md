@@ -117,6 +117,12 @@ no teacher. The two parent soups (`f30f86b7…`, `dfcddb05…`) are not part of 
   `python -c "import sys; sys.path[:0]=['scripts','src']; import package_rsn_weights as p; from pathlib import Path; p.export(Path('WEIGHTS.pt'), Path('OUT_DIR'), True)"`
   writes `OUT_DIR/model_pose.torchscript`. For the final ViT members this produced `32408c7e…` (L3) and
   `065dea54…` (VP) (`R5/export_L3.log`, `R5/export_VP.log`).
+  Prerequisites of `export()`: a CPU-only PyTorch 2.4.1 environment at `.venv/` in the repository root (it runs
+  `.venv/bin/python` for the ViT export), the weights file placed inside the repository tree, and the organizer
+  Market data under `data/` for its parity check. A re-export is not byte-identical as a file: the
+  `*.debug_pkl` entries (absolute source paths) and `.data/serialization_id` differ, while all 310 tensors, the
+  `code/` entries and the constants are identical (re-checked for L3 and VP from the uploaded `.pt` files on
+  2026-10-27). Compare members by tensors and code, not by file hash.
 * Structural attention export (final archive only): `python scripts/rewrite_static_attention_dim.py --source
   model_pose.torchscript --output model_l3.torchscript --report report.json` replaces the traced
   `channels // heads` scalar division in the 24 attention blocks by the constant head width 64 (removes a
@@ -130,7 +136,8 @@ no teacher. The two parent soups (`f30f86b7…`, `dfcddb05…`) are not part of 
   of v154 and of export revision v127).
 * Archive v154 (`upar_track3_final_candidate_v154.zip`, SHA-256 `82a5f53e…69a4`): no retraining and no new
   export. `inference/v154_build/build_v154.py` copies the v127 archive members unchanged (the three TorchScript files
-  above, `LICENSE_MMPose.txt`, `metadata.yaml`), replaces `run.py` by the v127 `run.py` patched with
+  above, `LICENSE_MMPose.txt`, `metadata.yaml`), replaces `run.py` by the v127 `run.py` (included as `inference/v154_build/run_v127.py`, SHA-256 `90bd6971…2309`)
+  patched with
   `inference/v154_build/patch_v153.py` (tier-gated four-padding scale TTA replacing pose-SAHI) and then
   `inference/v154_build/patch_v154.py` (confidence-preserving fusion), and appends a revision note to
   `model_meta.json`. Usage: `python patch_v153.py run_v127.py run_v153.py` and

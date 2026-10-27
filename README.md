@@ -20,7 +20,7 @@ Both ViT-L members end with a ground-truth-only loose-box fine-tuning stage ("LB
 weights are averaged. The method is described in the fact sheet that accompanies this repository; the exact
 inference code is the `run.py` inside the submitted archive.
 
-**v155 versus v154.** The final archive v155 is the v154 archive (described by commit `1ae145e`,
+**v155 versus v154.** The final archive v155 is the v154 archive (described by commit `8aed599`,
 `upar_track3_final_candidate_v154.zip`, SHA-256 `82a5f53e…69a4`) plus one last-resort completion guard, nothing else:
 the three TorchScript members, `LICENSE_MMPose.txt` and `metadata.yaml` are byte-identical to v154 and v127, and
 `model_meta.json` only gains a revision note. Once 7,150 s have elapsed since model loading started (i.e. after the
@@ -34,7 +34,7 @@ such a time-limit kill into a completed run. `run.py` = v154 `run.py` +
 [`inference/v155_build/template_pose.json`](inference/v155_build/template_pose.json); description and checks:
 [`evidence/v155_completion_guard_and_checks.txt`](evidence/v155_completion_guard_and_checks.txt).
 
-**v154 versus v127.** Commit `0932e87` of this repository describes export revision v127
+**v154 versus v127.** Commit `1813a19` of this repository describes export revision v127
 (`upar_track3_final_candidate.zip`, SHA-256 `83ffd518…dca1`). Inference revision v154 uses the same trained weights
 (all three TorchScript members, `LICENSE_MMPose.txt` and `metadata.yaml` are byte-identical) and changes only
 inference: (1) while the wall-clock controller is at tier ≤ 1 and before its 6,600 s time budget, every member uses
@@ -52,6 +52,10 @@ paths). Development evidence and the checks run on the archive:
 ## 1. Trained weights
 
 The weights are too large for the repository and are hosted at: **WEIGHTS-URL-TO-BE-FILLED**
+
+All three `.pt` files load with `torch.load(path, map_location='cpu', weights_only=True)` (tensors and plain
+metadata only). Their metadata, and `model_meta.json` inside the archive, record the RSN run directory `R1` of
+`TRAINING.md` under its original internal name; it is `artifacts/runs/20261006T003419+0900_resume_v53` here.
 
 | File | Size | SHA-256 | Purpose |
 |---|---|---|---|
@@ -156,7 +160,7 @@ the TorchScript export and the structural attention export used for the final ar
 | `artifacts/runs/**` | the training configurations of all stages (including the LB3 seed runs), with their original paths and seeds; soup and export logs of the final members |
 | `evidence/` | package reports of the final archive (v155), of v154 and of v127, v155 completion guard and checks, v154 inference change, development numbers and checks, static-attention export and parity reports, CPU smoke test (v127 archive); official scoring/runtime logs of the earlier entry 1006463; saved competition rules |
 | `historical_appendix/` | provenance of external pre-trained weights (URLs, SHA-256), lineage notes, known gaps (written 2026-10-12) |
-| `requirements/`, `environment.yml` | inference (`local.txt`) and training (`training-local.txt`) dependencies |
+| `requirements/`, `environment.yml` | local inference tools (`local.txt`) and training (`training-local.txt`) dependencies; the submitted archive itself needs only PyTorch 2.4.1 (official image, or `torch-cpu.txt` for a CPU smoke test) |
 | `peta_file_mapping.txt` | PETA file mapping from the official starter kit (used by the configs) |
 
 ## 5. Data, pre-training and disclosures
@@ -177,7 +181,7 @@ the TorchScript export and the structural attention export used for the final ar
 
 ## 6. Earlier leaderboard entry 1006463
 
-The first commit of this repository (`93ea8fb`) describes submission 1006463 (archive
+The first commit of this repository (`d48b1b5`) describes submission 1006463 (archive
 `upar_fusion3_sahi_anat9_v109.zip`, SHA-256 `b2210cf1…6375`, AP 0.886743, AP50 0.965086, AP75 0.925566,
 AP_medium 0.857837, AP_large 0.679830 in the official scoring log; the organizers' snapshot lists AP_medium and
 AP_large as 0). Its evidence files are kept in `evidence/` (`*_1006463*`). In its scored run the older runtime
@@ -193,7 +197,8 @@ guards by the controller of §2.
   deterministic, and the source code evolved during the challenge (see `TRAINING.md` §6 and
   [`historical_appendix/GAPS_20261012.md`](historical_appendix/GAPS_20261012.md)). The final trainer-format member
   weights are provided instead. The last stage (LB3, two seeds) and its soups were run with the trainer and soup
-  script contained in this repository.
+  script contained in this repository; re-running it needs the two parent soups (`f30f86b7…`, `dfcddb05…`),
+  which are not part of the weight upload because of their size (available from the author on request).
 * The Docker images were written for this release but could not be built on the author's machine (no Docker
   daemon access). The inference runner was tested outside Docker with PyTorch 2.4.1 on the CPU with the exact v127
   archive (6 images, `evidence/smoke_cpu_final_v127.txt`); for the v154 and v155 archives see
