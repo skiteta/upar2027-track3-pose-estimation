@@ -51,7 +51,7 @@ paths). Development evidence and the checks run on the archive:
 
 ## 1. Trained weights
 
-The weights are too large for the repository and are hosted at: **WEIGHTS-URL-TO-BE-FILLED**
+The weights are too large for the repository and are hosted at: **https://drive.google.com/drive/folders/1hYCE_21rpKk29x6yyg9tFBgDHQ8yBl0E?usp=sharing**
 
 All three `.pt` files load with `torch.load(path, map_location='cpu', weights_only=True)` (tensors and plain
 metadata only). Their metadata, and `model_meta.json` inside the archive, record the RSN run directory `R1` of
