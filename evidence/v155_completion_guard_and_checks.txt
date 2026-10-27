@@ -1,0 +1,45 @@
+Final archive v155 = v154 + one last-resort completion guard (2026-10-27, author's machine)
+
+Archive    : upar_track3_final_candidate_v155.zip, 1,256,235,420 bytes
+             sha256 97a5afa60e780ee802ab2190121e74937827916eb8acf34aacf7297eca3b1d4e
+Unchanged  : model_rsn.torchscript, model_l3.torchscript, model_vp.torchscript, LICENSE_MMPose.txt, metadata.yaml
+             are byte-identical to the v154 and v127 archives (member hashes in evidence/package_report_final_v155.json,
+             evidence/package_report_final_v154.json and evidence/package_report_final_v127.json).
+Changed    : run.py (sha256 1aecb1a5482097d2bf941c2032a1c70d43c4f517e7b6bcb5210f8741e302654f) and model_meta.json
+             (deployment_status "LOCAL_CANDIDATE_v155_UNSUBMITTED" and an appended revision note
+             "v155_completion_guard"; everything else as in v154). Same member order and ZIP layout as v154.
+
+run.py derivation:
+  v154 run.py (sha256 2c37093d...7f2a, see evidence/v154_inference_change_and_checks.txt)
+    --inference/v155_build/patch_v155.py with inference/v155_build/template_pose.json--> v155 run.py (sha256 1aecb1a5...654f)
+  Usage: python patch_v155.py run_v154.py run_v155.py template_pose.json
+  Re-applied to the run.py extracted from the v154 archive; it reproduced the v155 run.py hash exactly.
+
+The change (patch_v155.py):
+  TEMPLATE_GUARD_SECONDS = 7150.0. Once 7,150 s have elapsed since model loading started, predict_image returns,
+  for every supplied box, a box-relative mean-pose template without any model forward: 17 joints at the mean
+  normalised position (x/w, y/h) of the development boxes (template_pose.json, joint order of
+  src/upar_pose/constants.py; the two ear joints use the nose position), visibility 1, person score 0.01. A non-finite box gives the template at (0, 0). The first use is printed
+  once ("[submission] completion guard: mean-pose template for the remaining images after ... s (... images)").
+  The guard comes after every other controller stage (tier walk, measured centre-padding fallback, member drops and
+  the 7,120 s single-member emergency mode). Before 7,150 s the code path is identical to v154; if the run finishes
+  before 7,150 s the predictions are those of v154.
+Motivation: in a simulated host that was six times slower than the author's GPU (k=6), even the single-member
+  centre mode was projected to exceed the documented 7,200 s limit (about 8,240 s for 30,245 images). The guard turns
+  such a would-be time-limit kill into a completed run in which only the remaining images receive the template
+  (template predictions are expected to score close to zero AP for those persons).
+
+Checks completed:
+  On the exact v155 archive:
+  * Codabench archive validation and ZIP CRC passed.
+  On the exact v154 archive (the v155 code path is identical before 7,150 s):
+  * PyTorch 2.4.1 CPU smoke test: 6/6 images with finite outputs.
+  * Edge-input test: 12/12 cases passed.
+  * Rehearsal of 3,346 images with the exact archive: exit code 0, all outputs finite, no member drop and no centre
+    mode.
+  * Simulated slower hosts (k = slowdown factor relative to the author's GPU; projections for 30,245 images):
+    k=1 about 4,180 s; k=3 about 6,490 s (the controller dropped the RSN member and alternated between the centre and
+    the full mode); k=6 about 8,240 s (single-member centre mode), i.e. above the 7,200 s limit, which motivated the
+    v155 guard.
+<<CHECK RESULTS v155 TO BE CONFIRMED>>
+Not done: Docker image build; complete run of 30,245 images on the official hardware; official score.

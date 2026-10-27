@@ -1,7 +1,7 @@
 # Training the three members of the final submission
 
-The final archive v154 uses the same trained members as export revision v127 and differs only in inference code
-(§5).
+The final archive v155 (= v154 + a last-resort completion guard) uses the same trained members as export revision
+v127 and differs only in inference code (§5).
 
 All paths are relative to the repository root. Each configuration under `artifacts/runs/**` is the configuration
 that was actually used, with its original `output_dir`, `event_path`, seeds and `init_checkpoint`. To retrain a
@@ -125,16 +125,23 @@ no teacher. The two parent soups (`f30f86b7…`, `dfcddb05…`) are not part of 
   development parity: `evidence/static_attention_dev_parity_v127.json`). The RSN member `model_rsn.torchscript`
   (`9df1ea68…`) is the file used since the earlier submissions.
 * The submitted `run.py`, `model_meta.json` and `metadata.yaml` are inside the archive; the archive is a plain ZIP of
-  these files, `LICENSE_MMPose.txt` and the three TorchScript members (`evidence/package_report_final_v154.json`
-  lists member hashes; `evidence/package_report_final_v127.json` those of export revision v127).
-* Final archive v154 (`upar_track3_final_candidate_v154.zip`, SHA-256 `82a5f53e…69a4`): no retraining and no new
+  these files, `LICENSE_MMPose.txt` and the three TorchScript members (`evidence/package_report_final_v155.json`
+  lists member hashes; `evidence/package_report_final_v154.json` and `evidence/package_report_final_v127.json` those
+  of v154 and of export revision v127).
+* Archive v154 (`upar_track3_final_candidate_v154.zip`, SHA-256 `82a5f53e…69a4`): no retraining and no new
   export. `inference/v154_build/build_v154.py` copies the v127 archive members unchanged (the three TorchScript files
   above, `LICENSE_MMPose.txt`, `metadata.yaml`), replaces `run.py` by the v127 `run.py` patched with
   `inference/v154_build/patch_v153.py` (tier-gated four-padding scale TTA replacing pose-SAHI) and then
   `inference/v154_build/patch_v154.py` (confidence-preserving fusion), and appends a revision note to
   `model_meta.json`. Usage: `python patch_v153.py run_v127.py run_v153.py` and
   `python patch_v154.py run_v153.py run_v154.py`; the result has SHA-256 `2c37093d…7f2a`, the `run.py` inside the
-  final archive (see `evidence/v154_inference_change_and_checks.txt`).
+  v154 archive (see `evidence/v154_inference_change_and_checks.txt`).
+* Final archive v155 (`upar_track3_final_candidate_v155.zip`, SHA-256 `97a5afa6…1d4e`): the v154 archive members
+  unchanged except `run.py`, patched with `inference/v155_build/patch_v155.py` and its template
+  `inference/v155_build/template_pose.json` (last-resort completion guard after 7,150 s), and a revision note in
+  `model_meta.json`; no retraining and no new export. Usage:
+  `python patch_v155.py run_v154.py run_v155.py template_pose.json`; the result has SHA-256 `1aecb1a5…654f`, the
+  `run.py` inside the final archive (see `evidence/v155_completion_guard_and_checks.txt`).
 
 ## 6. Not certified
 

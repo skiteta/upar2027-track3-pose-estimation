@@ -8,8 +8,8 @@ This repository contains the inference code, training code, configurations and c
 | Item | Value |
 |---|---|
 | Codabench submission | **[final submission ID to be added after submission]** |
-| Submitted archive | `upar_track3_final_candidate_v154.zip`, 1,256,234,787 bytes, SHA-256 `82a5f53eb01f88c3ec4d95b2f67299ded3c86999181e446e3fbcc0bce71169a4` |
-| Internal model type | `upar_fusion3_sahi_anat9_v118` (`run.py` SHA-256 `2c37093d…7f2a`), inference revision "v154" (TorchScript members byte-identical to export revision "v127") |
+| Submitted archive | `upar_track3_final_candidate_v155.zip`, 1,256,235,420 bytes, SHA-256 `97a5afa60e780ee802ab2190121e74937827916eb8acf34aacf7297eca3b1d4e` |
+| Internal model type | `upar_fusion3_sahi_anat9_v118` (`run.py` SHA-256 `1aecb1a5…654f`), archive revision "v155" = inference revision "v154" + a last-resort completion guard (TorchScript members byte-identical to export revision "v127") |
 | Official result | **[final score to be added after scoring]** |
 | Earlier leaderboard entry | 1006463 (`upar_fusion3_sahi_anat9_v109.zip`, AP 0.886743); see §6 |
 
@@ -20,8 +20,22 @@ Both ViT-L members end with a ground-truth-only loose-box fine-tuning stage ("LB
 weights are averaged. The method is described in the fact sheet that accompanies this repository; the exact
 inference code is the `run.py` inside the submitted archive.
 
-**v154 versus v127.** The previous commit (`0932e87`) of this repository describes export revision v127
-(`upar_track3_final_candidate.zip`, SHA-256 `83ffd518…dca1`). The final archive v154 uses the same trained weights
+**v155 versus v154.** The final archive v155 is the v154 archive (described by commit `1ae145e`,
+`upar_track3_final_candidate_v154.zip`, SHA-256 `82a5f53e…69a4`) plus one last-resort completion guard, nothing else:
+the three TorchScript members, `LICENSE_MMPose.txt` and `metadata.yaml` are byte-identical to v154 and v127, and
+`model_meta.json` only gains a revision note. Once 7,150 s have elapsed since model loading started (i.e. after the
+tier walk, the measured centre-padding fallback, member drops and the 7,120 s single-member emergency mode of §2),
+`predict_image` returns a box-relative mean-pose template (17 joints at the mean normalised position of the
+development boxes, ears = nose, score 0.01) without any model forward, so the run always completes. Before 7,150 s
+the code path is identical to v154. Reason: on a simulated host six times slower than the author's GPU, even the
+single-member centre mode was projected above the 7,200 s limit (about 8,240 s for 30,245 images); the guard turns
+such a time-limit kill into a completed run. `run.py` = v154 `run.py` +
+[`inference/v155_build/patch_v155.py`](inference/v155_build/patch_v155.py) with
+[`inference/v155_build/template_pose.json`](inference/v155_build/template_pose.json); description and checks:
+[`evidence/v155_completion_guard_and_checks.txt`](evidence/v155_completion_guard_and_checks.txt).
+
+**v154 versus v127.** Commit `0932e87` of this repository describes export revision v127
+(`upar_track3_final_candidate.zip`, SHA-256 `83ffd518…dca1`). Inference revision v154 uses the same trained weights
 (all three TorchScript members, `LICENSE_MMPose.txt` and `metadata.yaml` are byte-identical) and changes only
 inference: (1) while the wall-clock controller is at tier ≤ 1 and before its 6,600 s time budget, every member uses
 four square-crop paddings 1.15/1.2/1.3/1.35, each with horizontal flip and equal weights, instead of 1.2/1.3; the
@@ -41,7 +55,7 @@ The weights are too large for the repository and are hosted at: **WEIGHTS-URL-TO
 
 | File | Size | SHA-256 | Purpose |
 |---|---|---|---|
-| `upar_track3_final_candidate_v154.zip` | 1.26 GB | `82a5f53e…69a4` | the exact submitted archive (`run.py`, `model_meta.json`, 3 FP16 TorchScript members) |
+| `upar_track3_final_candidate_v155.zip` | 1.26 GB | `97a5afa6…1d4e` | the exact submitted archive (`run.py`, `model_meta.json`, 3 FP16 TorchScript members) |
 | `soup_L3_LB3_s12_prod.pt` | 1.24 GB | `ae52299b…ea66` | trainer-format weights of the ViT-L "L3" member (uniform soup of 2 LB3 seeds) |
 | `soup_VP_LB3_s12_prod.pt` | 1.24 GB | `08267f03…db67` | trainer-format weights of the ViT-L "VP" member (uniform soup of 2 LB3 seeds) |
 | `FB_soup_e4to7_weights.pt` | 0.24 GB | `3728055d…08992` | trainer-format weights of the RSN member (unchanged since 1006463) |
@@ -66,7 +80,7 @@ adds `inference/run_codabench_layout.py`, which reads the Codabench input layout
 
 ```bash
 # 1) unpack the exact submitted archive (run.py must be at the root of this folder)
-mkdir -p submission && unzip weights/upar_track3_final_candidate_v154.zip -d submission
+mkdir -p submission && unzip weights/upar_track3_final_candidate_v155.zip -d submission
 
 # 2) input in the Codabench layout:
 #    input_data/images/<file_name>   and   input_data/boxes.json  (COCO images + person boxes)
@@ -90,10 +104,11 @@ Without Docker, any Python ≥ 3.10 environment with `torch==2.4.1`, `numpy` and
 (add `--limit 10` for a quick smoke test; relative paths are resolved from the calling directory). The archive
 selects CUDA when available and falls back to the CPU. A short smoke test starts at tier 0 and therefore runs the
 four-padding path (the CPU smoke switch of the earlier archives, which forced the zoom path for the first four CPU
-images, has no effect in v154 because the zoom path is disabled). The runner is unchanged since v127; its CPU smoke
+images, has no effect since v154 because the zoom path is disabled). The runner is unchanged since v127; its CPU smoke
 test with the v127 archive is recorded in [`evidence/smoke_cpu_final_v127.txt`](evidence/smoke_cpu_final_v127.txt).
-The checks of the v154 archive are listed in
-[`evidence/v154_inference_change_and_checks.txt`](evidence/v154_inference_change_and_checks.txt).
+The checks of the v154 and v155 archives are listed in
+[`evidence/v154_inference_change_and_checks.txt`](evidence/v154_inference_change_and_checks.txt) and
+[`evidence/v155_completion_guard_and_checks.txt`](evidence/v155_completion_guard_and_checks.txt).
 
 ### Important: the executed path depends on the speed of the machine
 
@@ -109,12 +124,16 @@ looks at image content or predictions, only at elapsed time and measured paces):
   from the measured paces; if even the centre mode is too slow, it drops the member with the largest sampled
   forward time and measures again;
 * the adaptive re-crop of loose single boxes stops after 6,400 s or when the projection exceeds 6,700 s;
-* an emergency mode at 7,120 s keeps only the fastest member with centre padding.
+* an emergency mode at 7,120 s keeps only the fastest member with centre padding;
+* completion guard (v155): from 7,150 s after the start of model loading, every remaining image gets a box-relative
+  mean-pose template (score 0.01) without any model forward, so the run completes instead of being stopped at the
+  limit (template predictions are expected to score close to zero for those persons); its first use is printed
+  (`[submission] completion guard: …`).
 
 All decisions are printed to stdout (`[submission] proportional SAHI controller … -> tier k`, `measured deadline
 allocation …`), so the official ingestion log shows which path ran. The log strings were kept from the earlier
 zoom-view controller: "SAHI controller" means the tier controller, and the start-up line
-`upar_fusion3_sahi_anat9_v118: 3-model fusion, 4 views + Gated-2Slice-SAHI` is printed although v154 runs no zoom
+`upar_fusion3_sahi_anat9_v118: 3-model fusion, 4 views + Gated-2Slice-SAHI` is printed although v154/v155 run no zoom
 views (tiers 0–1: eight views per member and box, tiers 2–3: four). On a faster or slower machine the same unmodified archive takes
 a different path, so its predictions — and usually its AP — differ from the scored ones. We do not modify the
 archive to imitate the server timing.
@@ -130,12 +149,12 @@ the TorchScript export and the structural attention export used for the final ar
 
 | Path | Content |
 |---|---|
-| `inference/` | offline Codabench-layout runner and COCO keypoint evaluation; `inference/v154_build/`: the two `run.py` patches and the packaging script of the final archive |
+| `inference/` | offline Codabench-layout runner and COCO keypoint evaluation; `inference/v154_build/`: the two `run.py` patches and the packaging script of the v154 archive; `inference/v155_build/`: the completion-guard patch and its template, which turn the v154 `run.py` into the final `run.py` |
 | `Dockerfile`, `docker/train.Dockerfile` | inference image (official base) and training image |
 | `src/upar_pose/` | model definitions (ViT-L pose graph, vendored RSN), data, evaluation utilities |
 | `scripts/` | trainer, augmentation, soups, TorchScript export, static-attention export and packaging tools |
 | `artifacts/runs/**` | the training configurations of all stages (including the LB3 seed runs), with their original paths and seeds; soup and export logs of the final members |
-| `evidence/` | package reports of the final archive (v154) and of v127, v154 inference change, development numbers and checks, static-attention export and parity reports, CPU smoke test (v127 archive); official scoring/runtime logs of the earlier entry 1006463; saved competition rules |
+| `evidence/` | package reports of the final archive (v155), of v154 and of v127, v155 completion guard and checks, v154 inference change, development numbers and checks, static-attention export and parity reports, CPU smoke test (v127 archive); official scoring/runtime logs of the earlier entry 1006463; saved competition rules |
 | `historical_appendix/` | provenance of external pre-trained weights (URLs, SHA-256), lineage notes, known gaps (written 2026-10-12) |
 | `requirements/`, `environment.yml` | inference (`local.txt`) and training (`training-local.txt`) dependencies |
 | `peta_file_mapping.txt` | PETA file mapping from the official starter kit (used by the configs) |
@@ -177,9 +196,10 @@ guards by the controller of §2.
   script contained in this repository.
 * The Docker images were written for this release but could not be built on the author's machine (no Docker
   daemon access). The inference runner was tested outside Docker with PyTorch 2.4.1 on the CPU with the exact v127
-  archive (6 images, `evidence/smoke_cpu_final_v127.txt`); for the v154 archive see
-  `evidence/v154_inference_change_and_checks.txt`. Completion of all 30,245 images within 7,200 s on the
-  official hardware was not tested locally.
+  archive (6 images, `evidence/smoke_cpu_final_v127.txt`); for the v154 and v155 archives see
+  `evidence/v154_inference_change_and_checks.txt` and `evidence/v155_completion_guard_and_checks.txt`. Completion
+  of all 30,245 images within 7,200 s on the official hardware was not tested locally; the v155 completion guard
+  ends the model forwards at 7,150 s, and any images left at that time receive template predictions.
 * Development numbers quoted in the fact sheet come from a reused five-camera PETA development set and are not an
   estimate of the leaderboard score. The v154 inference changes were selected on the same set and on the
   PoseTrack18 diagnostic sample (+0.00045 development AP at tier 1 over v127); the final score is unknown.

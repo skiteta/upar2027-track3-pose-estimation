@@ -1,0 +1,15 @@
+{
+  "archive": "artifacts/runs/20261027T1645_v155/upar_track3_final_candidate_v155.zip",
+  "archive_sha256": "97a5afa60e780ee802ab2190121e74937827916eb8acf34aacf7297eca3b1d4e",
+  "archive_bytes": 1256235420,
+  "members": {
+    "LICENSE_MMPose.txt": "aa2c6f3408169b96e5547c875deb481c91502514c1885fa0acb4b596c8909cb9",
+    "metadata.yaml": "6bf44083a3ab99e68efa2f4151cfec26d0a87876213011bc22061a031d24df23",
+    "model_l3.torchscript": "d1570a01939023295825aff2f9d519457cd0e27c98c7562dfc33575c580dda02",
+    "model_meta.json": "f645e515661a5452949e8dcb80e97e8f99a7d5c9d5a884e3b1da10f885b55a4f",
+    "model_rsn.torchscript": "9df1ea685fb0c050640548a293948e424400d78f64a833a495622204bc252736",
+    "model_vp.torchscript": "b64527f2585af2baecdd9fada4122bcf6a29805ac606692cf39b87451d5baaf7",
+    "run.py": "1aecb1a5482097d2bf941c2032a1c70d43c4f517e7b6bcb5210f8741e302654f"
+  },
+  "crc_ok": true
+}
