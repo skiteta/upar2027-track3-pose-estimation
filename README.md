@@ -7,10 +7,10 @@ This repository contains the inference code, training code, configurations and c
 
 | Item | Value |
 |---|---|
-| Codabench submission | **1012342** (submitted 2026-10-27 17:08 JST; status Running at 17:30 JST) |
+| Codabench submission | **1012342** (submitted 2026-10-27 17:08 JST; Finished 2026-10-27, before 18:59 JST) |
 | Submitted archive | `upar_track3_final_candidate_v155.zip`, 1,256,235,420 bytes, SHA-256 `97a5afa60e780ee802ab2190121e74937827916eb8acf34aacf7297eca3b1d4e` |
 | Internal model type | `upar_fusion3_sahi_anat9_v118` (`run.py` SHA-256 `1aecb1a5…654f`), archive revision "v155" = inference revision "v154" + a last-resort completion guard (TorchScript members byte-identical to export revision "v127") |
-| Official result | **[final score to be added after scoring]** |
+| Official result | **AP 0.906042**, AP50 0.971819, AP_medium 0.879999, AP_large 0.693401 (Codabench leaderboard) |
 | Earlier leaderboard entry | 1006463 (`upar_fusion3_sahi_anat9_v109.zip`, AP 0.886743); see §6 |
 
 The method is a three-model top-down heatmap fusion (3×RSN-50 + two ViT-L/16) with a tier-gated four-padding
@@ -202,6 +202,6 @@ guards by the controller of §2.
   ends the model forwards at 7,150 s, and any images left at that time receive template predictions.
 * Development numbers quoted in the fact sheet come from a reused five-camera PETA development set and are not an
   estimate of the leaderboard score. The v154 inference changes were selected on the same set and on the
-  PoseTrack18 diagnostic sample (+0.00045 development AP at tier 1 over v127); the final score is unknown.
+  PoseTrack18 diagnostic sample (+0.00045 development AP at tier 1 over v127); the official result of 1012342 is AP 0.906042.
 * No new licence is granted for the code or weights beyond the organizers' verification of this challenge
   entry; third-party notices (e.g. `LICENSE_MMPose.txt` inside the archive) remain unchanged.
