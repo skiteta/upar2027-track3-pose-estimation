@@ -7,7 +7,7 @@ This repository contains the inference code, training code, configurations and c
 
 | Item | Value |
 |---|---|
-| Codabench submission | **[final submission ID to be added after submission]** |
+| Codabench submission | **1012342** (submitted 2026-10-27 17:08 JST; status Running at 17:30 JST) |
 | Submitted archive | `upar_track3_final_candidate_v155.zip`, 1,256,235,420 bytes, SHA-256 `97a5afa60e780ee802ab2190121e74937827916eb8acf34aacf7297eca3b1d4e` |
 | Internal model type | `upar_fusion3_sahi_anat9_v118` (`run.py` SHA-256 `1aecb1a5…654f`), archive revision "v155" = inference revision "v154" + a last-resort completion guard (TorchScript members byte-identical to export revision "v127") |
 | Official result | **[final score to be added after scoring]** |
